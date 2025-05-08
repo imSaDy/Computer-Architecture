@@ -1,0 +1,11 @@
+*.vsim
+*.wpf
+*.pdf
+*.xoj
+*.mpf
+*.vcd
+*.mti
+*.mpf
+*.wlf
+*.bak
+work
