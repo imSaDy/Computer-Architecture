@@ -1,42 +1,4 @@
-# Compile of AdderPC.v failed with 1 errors.
-# Compile of AdderPC.v was successful.
-# Compile of AdderPC.v was successful.
-# Compile of AdderPCTarget.v was successful.
-# 2 compiles, 0 failed with no errors.
-# Compile of InstructionMemory.v failed with 1 errors.
-# Compile of InstructionMemory.v was successful.
-# Compile of RegisterPC.v was successful.
-# Compile of DataMemory.v failed with 1 errors.
-# Compile of DataMemory.v was successful.
-# Compile of RegisterFile.v was successful.
-# Compile of ALU.v failed with 1 errors.
-# Compile of ALU.v was successful.
-# Compile of Extend.v failed with 3 errors.
-# Compile of Extend.v failed with 1 errors.
-# Compile of Extend.v was successful with warnings.
-# Compile of Extend.v was successful.
-# Compile of Extend.v was successful.
-# Compile of MuxSrcB.v failed with 1 errors.
-# 2 compiles, 1 failed with 1 error.
-# Compile of MuxSrcB.v failed with 1 errors.
-# Compile of MuxSrcB.v was successful.
-# Compile of MuxSrcB.v was successful.
-# Compile of MuxResult.v failed with 5 errors.
-# 2 compiles, 1 failed with 5 errors.
-# Compile of MuxResult.v was successful.
-# Compile of RegisterPC.v was successful.
-# Compile of RegisterFile.v was successful.
-# Compile of MuxResult.v was successful.
-# Compile of MuxPC.v was successful.
-# 4 compiles, 0 failed with no errors.
-# Compile of MuxPC.v was successful.
-# Compile of RegisterFile.v was successful.
-# Compile of MuxPC.v was successful.
 # Compile of DataPath.v was successful.
-# 3 compiles, 0 failed with no errors.
-# Compile of Controller.v failed with 1 errors.
-# Compile of Controller.v failed with 5 errors.
-# Compile of Controller.v failed with 1 errors.
 # Compile of AdderPC.v was successful.
 # Compile of AdderPCTarget.v was successful.
 # Compile of InstructionMemory.v was successful.

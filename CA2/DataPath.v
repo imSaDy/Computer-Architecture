@@ -1,8 +1,8 @@
 module DataPath(
     input clk,
     input reset,
-    input WE,
-    input WE3,
+    input MemWrite,
+    input RegWrite,
     input ALUSrc,
     input [2:0] ALUControl,
     input [2:0] ImmSrc,
@@ -53,7 +53,7 @@ module DataPath(
     RegisterFile registerFile(
         .clk(clk),
         .reset(reset),
-        .WE3(WE3),
+        .WE3(RegWrite),
         .A1(A1),
         .A2(A2),
         .A3(A3),
@@ -76,7 +76,7 @@ module DataPath(
     );
     DataMemory dataMemory(
         .clk(clk),
-        .WE(WE),
+        .WE(MemWrite),
         .A(ALUResult),
         .WD(RD2),
         .RD(RD)
