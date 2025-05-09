@@ -1,7 +1,7 @@
 module RegisterFile(
     input clk,
     input reset, 
-    input WE, 
+    input WE3, 
     input [4:0] A1,
     input [4:0] A2,
     input [4:0] A3,
@@ -17,7 +17,7 @@ module RegisterFile(
             for (i = 0; i < 32; i = i + 1)
                 register[i] <= 32'b0; 
         end
-        else if (WE)
+        else if (WE3)
             register[A3] <= WD3; 
     end
 
