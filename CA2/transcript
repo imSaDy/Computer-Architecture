@@ -1,0 +1,11 @@
+# Compile of AdderPC.v failed with 1 errors.
+# Compile of AdderPC.v was successful.
+# Compile of AdderPC.v was successful.
+# Compile of AdderPCTarget.v was successful.
+# 2 compiles, 0 failed with no errors.
+# Compile of InstructionMemory.v failed with 1 errors.
+# Compile of InstructionMemory.v was successful.
+# Compile of RegisterPC.v was successful.
+# Compile of DataMemory.v failed with 1 errors.
+# Compile of DataMemory.v was successful.
+# Compile of RegisterFile.v was successful.
