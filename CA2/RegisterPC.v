@@ -1,12 +1,12 @@
 module RegisterPC(
     input clk, reset,
-    input [31:0] PCInput,
+    input [31:0] PCNext,
     output reg [31:0] PC
 );
-    always @(posedge clk or posedge reset) begin
+    always @(posedge clk, posedge reset) begin
         if (reset)
             PC <= 32'd0; 
         else 
-            PC <= PCInput; 
+            PC <= PCNext; 
     end
 endmodule

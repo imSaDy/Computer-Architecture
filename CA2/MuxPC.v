@@ -1,0 +1,14 @@
+module MuxPC(
+    input PCSrc,
+    input [31:0] PCPlus4,
+    input [31:0] PCTarget,
+    output reg [31:0] PCNext
+);
+    always @(PCSrc, PCPlus4, PCTarget, PCNext) begin
+        case (PCSrc)
+            1'b0: PCNext = PCPlus4;
+            1'b1: PCNext = PCTarget;
+            default: PCNext = 32'b0; 
+        endcase
+    end
+endmodule
