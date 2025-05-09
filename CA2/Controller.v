@@ -1,27 +1,29 @@
 module Controller (
     input[6:0] op,
-    input[2:0] funct3
+    input[2:0] funct3,
     input funct7,
     input Zero,
-    output PCSrc,
-    output RegWrite,
-    output MemWrite,
-    output [1:0] ResultSrc,
-    output ALUSrc,
-    output [2:0] ALUControl,
-    output ImmSrc[2:0],
-    output Branch,
-    output Jump.
-    output wire [1:0]PCSrc
+    output reg RegWrite,
+    output reg MemWrite,
+    output reg [1:0] ResultSrc,
+    output reg ALUSrc,
+    output reg [2:0] ALUControl,
+    output reg [2:0] ImmSrc,
+    output reg Branch,
+    output reg Jump,
+    output reg [1:0]PCSrc
 
 );
+
+
+
     parameter [6:0]  Rtype = 7'b0110011,
                     Itype = 7'b0010011,
                     Lw = 7'b0000011,
                     Sw = 7'b0100011,
-                    Branch = 7'b1100011,
+                    Btype = 7'b1100011,
                     Jalr = 7'b1100111;
-    wire [1:0] ALUOp;
+    reg [1:0] ALUOp;
     assign PCSrc[0] = (Branch & Zero)| Jump;
     //Main Decoder
     always @(op) begin
@@ -69,7 +71,7 @@ module Controller (
                 Branch = 1'b0;
                 Jump= 1'b0;
             end
-            Branch: begin // branch
+            Btype: begin // branch
                 ALUOp = 2'b01;
                 RegWrite = 1'b0;
                 MemWrite = 1'b0;
@@ -102,13 +104,13 @@ module Controller (
     always @(ALUOp, funct3, funct7,op) begin
         case (ALUOp)
             2'b00: ALUControl = ALU_ADD;
-            2'b01: 3'b000: ALUControl = ALU_SUB; // beq
+            2'b01: ALUControl = ALU_SUB; // beq
             2'b10: begin // R-type and I-type
                 case (funct3)
                     3'b000: ALUControl = ((op==Rtype &funct7==1'b0) | op==Jalr) ? ALU_ADD : ALU_SUB; // add or sub
                     3'b010: ALUControl = ALU_SLT; 
                     3'b110: ALUControl = ALU_OR;
-                    3'b111: ALUControl = ALU_AND
+                    3'b111: ALUControl = ALU_AND;
                 endcase
             end
         endcase
