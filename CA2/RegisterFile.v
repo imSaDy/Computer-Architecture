@@ -12,16 +12,19 @@ module RegisterFile(
     reg [31:0] register [0:31];
     integer i; 
 
+    initial begin
+        register[0] = 32'd0;
+    end
+
     always @(posedge clk, posedge reset) begin
         if (reset) begin
             for (i = 0; i < 32; i = i + 1)
                 register[i] <= 32'b0; 
         end
-        else if (WE3)
+        else if (WE3 && (A3 != 5'd0))
             register[A3] <= WD3; 
     end
 
-    assign register[0] = 32'b0; 
-    assign RD1 = register[A1];
-    assign RD2 = register[A2];
+    assign RD1 = (A1 == 5'd0) ? 32'd0 : register[A1];
+    assign RD2 = (A2 == 5'd0) ? 32'd0 : register[A2];
 endmodule

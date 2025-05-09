@@ -5,8 +5,8 @@ module DataMemory(
     input [31:0] WD,
     output reg [31:0] RD 
 );
-    reg [7:0] dataMemory [0:$pow(2, 16) - 1];
-    reg [31:0] address;
+    reg [7:0] dataMemory [0:65535];
+    wire [31:0] address;
 
     assign address = {A[31:2], 2'b00};
 
@@ -16,9 +16,15 @@ module DataMemory(
 
     always @(posedge clk) begin
         if (WE)
-            {dataMemory[address + 3], dataMemory[address + 2], dataMemory[address + 1], dataMemory[address]} = WD; 
+            {dataMemory[address + 3], 
+             dataMemory[address + 2],
+             dataMemory[address + 1], 
+             dataMemory[address]} = WD; 
     end
     always @(*) begin
-        RD = {dataMemory[address + 3], dataMemory[address + 2], dataMemory[address + 1], dataMemory[address]}; 
+        RD = {dataMemory[address + 3], 
+              dataMemory[address + 2], 
+              dataMemory[address + 1], 
+              dataMemory[address]}; 
     end
 endmodule

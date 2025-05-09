@@ -6,7 +6,7 @@ module MuxResult(
     input [31:0] ImmExt,
     output reg [31:0] Result
 );
-    always @(ResultSrc, ALUResult, RD, PCPlus4, ImmExt) begin
+    always @(*) begin
         case (ResultSrc)
             2'b00: Result = ALUResult;
             2'b01: Result = RD;

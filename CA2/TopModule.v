@@ -11,7 +11,6 @@ module TopModule(
     wire [1:0] ResultSrc, PCSrc;
     wire [2:0] ALUControl, ImmSrc;
 
-    // Instantiate the Controller
     Controller controller(
         .op(opcode),
         .funct3(func3),
@@ -26,7 +25,6 @@ module TopModule(
         .PCSrc(PCSrc)
     );
 
-    // Instantiate the DataPath
     DataPath dataPath(
         .clk(clk),
         .reset(reset),

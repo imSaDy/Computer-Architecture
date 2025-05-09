@@ -30,6 +30,7 @@ module DataPath(
     assign func3 = instr[14:12];
     assign func7 = instr[31:25];
     assign opcode = instr[6:0];
+    assign WD3 = Result;
 
     InstructionMemory instrMem(
         .PC(PC),

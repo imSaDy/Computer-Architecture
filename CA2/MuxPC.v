@@ -5,7 +5,7 @@ module MuxPC(
     input [31:0] ALUResult,
     output reg [31:0] PCNext
 );
-    always @(PCSrc, PCPlus4, PCTarget, PCNext) begin
+    always @(*) begin
         case (PCSrc)
             2'b00: PCNext = PCPlus4;
             2'b01: PCNext = PCTarget;
