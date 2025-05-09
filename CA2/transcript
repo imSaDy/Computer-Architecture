@@ -3,3 +3,5 @@
 # Compile of AdderPC.v was successful.
 # Compile of AdderPCTarget.v was successful.
 # 2 compiles, 0 failed with no errors.
+# Compile of InstructionMemory.v failed with 1 errors.
+# Compile of InstructionMemory.v was successful.
