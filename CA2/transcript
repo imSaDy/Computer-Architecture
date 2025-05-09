@@ -20,3 +20,7 @@
 # 2 compiles, 1 failed with 1 error.
 # Compile of MuxSrcB.v failed with 1 errors.
 # Compile of MuxSrcB.v was successful.
+# Compile of MuxSrcB.v was successful.
+# Compile of MuxResult.v failed with 5 errors.
+# 2 compiles, 1 failed with 5 errors.
+# Compile of MuxResult.v was successful.
