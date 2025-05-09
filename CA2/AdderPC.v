@@ -1,4 +1,4 @@
-module name (
+module AdderPC (
     input [31:0] PC,
     output [31:0] PCPlus4
 );
