@@ -11,7 +11,7 @@ module DataMemory(
     assign address = {A[31:2], 2'b00};
 
     initial begin
-        $readmem("DataMemory.mem", dataMemory); 
+        $readmemh("DataMemory.mem", dataMemory); 
     end
 
     always @(posedge clk) begin
