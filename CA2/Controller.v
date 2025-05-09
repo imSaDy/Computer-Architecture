@@ -14,17 +14,17 @@ module Controller (
     output reg [1:0]PCSrc
 
 );
-
-
-
     parameter [6:0]  Rtype = 7'b0110011,
                     Itype = 7'b0010011,
                     Lw = 7'b0000011,
                     Sw = 7'b0100011,
                     Btype = 7'b1100011,
-                    Jalr = 7'b1100111;
+                    Jalr = 7'b1100111,
+                    LUI= 7'b0110111;
     reg [1:0] ALUOp;
-    assign PCSrc[0] = (Branch & Zero)| Jump;
+    reg branch_zero_type;
+    assign branch_zero_type= (funct3==1'h1)? ~Zero : Zero;
+    assign PCSrc[0] = (Branch & branch_zero_type)| Jump;
     //Main Decoder
     always @(op) begin
         {PCSrc,RegWrite,MemWrite,ResultSrc,ALUSrc,ImmSrc,Branch,Jump,PCSrc[1]} = 15'b0;
@@ -92,8 +92,19 @@ module Controller (
                 Jump= 1'b1;
                 PCSrc[1]=1'b1;
             end
+            LUI: begin // lui
+                ALUOp = 2'b00; //aluop is xx
+                RegWrite = 1'b1;
+                MemWrite = 1'b0;
+                ResultSrc = 2'b11;
+                ALUSrc = 1'b0;
+                ImmSrc = 3'b011;
+                Branch = 1'b0;
+                Jump= 1'b0;
+            end
         endcase
     end
+
     //ALUDeocder
     parameter [2:0] 
                     ALU_ADD = 3'b000,
