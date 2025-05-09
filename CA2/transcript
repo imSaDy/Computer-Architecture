@@ -11,3 +11,6 @@
 # Compile of RegisterFile.v was successful.
 # Compile of ALU.v failed with 1 errors.
 # Compile of ALU.v was successful.
+# Compile of Extend.v failed with 3 errors.
+# Compile of Extend.v failed with 1 errors.
+# Compile of Extend.v was successful with warnings.
