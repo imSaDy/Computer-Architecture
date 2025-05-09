@@ -9,11 +9,11 @@ module Controller (
     output reg ALUSrc,
     output reg [2:0] ALUControl,
     output reg [2:0] ImmSrc,
-    output reg Branch,
-    output reg Jump,
+
     output reg [1:0]PCSrc
 
 );
+    reg Branch, Jump;
     parameter [6:0]  Rtype = 7'b0110011,
                     Itype = 7'b0010011,
                     Lw = 7'b0000011,

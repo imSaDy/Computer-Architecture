@@ -2,18 +2,36 @@ module TopModule(
     input clk,
     input reset
 );
-    wire WE, WE3, ALUSrc;
-    wire [2:0] ALUControl, ImmSrc;
+    // Wires to connect Controller and DataPath
+    wire [6:0] opcode;
+    wire [2:0] func3;
+    wire [6:0]func7;
+    wire zero;
+    wire RegWrite, MemWrite, ALUSrc;
     wire [1:0] ResultSrc, PCSrc;
-    wire zero; 
-    wire [2:0] func3; 
-    wire [6:0] func7, opcode;
+    wire [2:0] ALUControl, ImmSrc;
 
-    DataPath datapath(
+    // Instantiate the Controller
+    Controller controller(
+        .op(opcode),
+        .funct3(func3),
+        .funct7(func7[5]),
+        .Zero(zero),
+        .RegWrite(RegWrite),
+        .MemWrite(MemWrite),
+        .ResultSrc(ResultSrc),
+        .ALUSrc(ALUSrc),
+        .ALUControl(ALUControl),
+        .ImmSrc(ImmSrc),
+        .PCSrc(PCSrc)
+    );
+
+    // Instantiate the DataPath
+    DataPath dataPath(
         .clk(clk),
         .reset(reset),
-        .WE(WE),
-        .WE3(WE3),
+        .MemWrite(MemWrite),
+        .RegWrite(RegWrite),
         .ALUSrc(ALUSrc),
         .ALUControl(ALUControl),
         .ImmSrc(ImmSrc),
@@ -24,5 +42,5 @@ module TopModule(
         .func7(func7),
         .opcode(opcode)
     );
-    
+
 endmodule
