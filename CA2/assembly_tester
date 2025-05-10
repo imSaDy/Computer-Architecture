@@ -14,5 +14,5 @@ FOR: beq s5,s4,END_LOOP
     END_IF:
     addi s2,s2,4
     addi s5,s5,1
-    jal zero,FOR
+    jalr ra,24(s0)
 END_LOOP:

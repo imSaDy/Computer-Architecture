@@ -1,2 +1,2 @@
 lui s8, 0x0FFFF
-addi s8, s8, 0x0FF
+addi s8, s8, 0x5FF

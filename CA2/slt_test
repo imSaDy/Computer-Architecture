@@ -1,4 +1,5 @@
 addi s1,zero,5
 addi s2,zero,4
-slt 
-slt s4,s1,s2
+slti s3,s1,6
+andi s4,s1,4
+ori s5,s1,4

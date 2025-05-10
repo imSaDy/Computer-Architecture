@@ -14,7 +14,7 @@ module Topmodule_tb;
         reset = 1;
         #100;
         reset = 0;
-        #400;
+        #4000;
         $stop;
     end
     initial begin

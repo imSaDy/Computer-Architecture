@@ -1,0 +1,5 @@
+addi s1,zero,1
+add s2,zero,zero
+bne s1,s2,END
+addi s1,s1,1
+END:
