@@ -1,0 +1,4 @@
+addi s1,zero,5
+addi s2,zero,4
+slt 
+slt s4,s1,s2

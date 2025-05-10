@@ -12,9 +12,9 @@ module Topmodule_tb;
     initial begin
         clk = 0;
         reset = 1;
-        #10;
+        #100;
         reset = 0;
-        #4000;
+        #400;
         $stop;
     end
     initial begin

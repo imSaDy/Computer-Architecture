@@ -2,7 +2,7 @@ module InstructionMemory(
     input [31:0] PC,
     output [31:0] instr
 );
-    reg [7:0] instrMemory [0:65536];
+reg [7:0] instrMemory [0:65536];
     wire [31:0] address;
 
     initial begin

@@ -99,7 +99,7 @@ module Controller (
                 MemWrite = 1'b0;
                 ResultSrc = 2'b11;
                 ALUSrc = 1'b0;
-                ImmSrc = 3'b011;
+                ImmSrc = 3'b100;
                 Branch = 1'b0;
                 Jump= 1'b0;
             end
