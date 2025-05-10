@@ -13,3 +13,17 @@
 # Compile of DataPath.v was successful.
 # Compile of Controller.v was successful.
 # 13 compiles, 0 failed with no errors.
+# Compile of AdderPC.v was successful.
+# Compile of AdderPCTarget.v was successful.
+# Compile of InstructionMemory.v was successful.
+# Compile of RegisterPC.v was successful.
+# Compile of DataMemory.v was successful.
+# Compile of RegisterFile.v was successful.
+# Compile of ALU.v was successful.
+# Compile of Extend.v was successful.
+# Compile of MuxSrcB.v was successful.
+# Compile of MuxResult.v was successful.
+# Compile of MuxPC.v was successful.
+# Compile of DataPath.v was successful.
+# Compile of Controller.v was successful.
+# 13 compiles, 0 failed with no errors.

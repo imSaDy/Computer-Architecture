@@ -23,7 +23,7 @@ module Controller (
                     LUI= 7'b0110111;
     reg [1:0] ALUOp;
     reg branch_zero_type;
-    assign branch_zero_type= (funct3==1'h1)? ~Zero : Zero;
+    assign branch_zero_type= (funct3==3'b001)? ~Zero : Zero;
     assign PCSrc[0] = (Branch & branch_zero_type)| Jump;
     //Main Decoder
     always @(op) begin
