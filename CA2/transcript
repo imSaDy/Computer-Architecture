@@ -1,29 +1,24 @@
-# Compile of DataPath.v was successful.
-# Compile of AdderPC.v was successful.
-# Compile of AdderPCTarget.v was successful.
-# Compile of InstructionMemory.v was successful.
-# Compile of RegisterPC.v was successful.
-# Compile of DataMemory.v was successful.
-# Compile of RegisterFile.v was successful.
-# Compile of ALU.v was successful.
-# Compile of Extend.v was successful.
-# Compile of MuxSrcB.v was successful.
-# Compile of MuxResult.v was successful.
-# Compile of MuxPC.v was successful.
-# Compile of DataPath.v was successful.
 # Compile of Controller.v was successful.
-# 13 compiles, 0 failed with no errors.
-# Compile of AdderPC.v was successful.
-# Compile of AdderPCTarget.v was successful.
-# Compile of InstructionMemory.v was successful.
-# Compile of RegisterPC.v was successful.
-# Compile of DataMemory.v was successful.
-# Compile of RegisterFile.v was successful.
-# Compile of ALU.v was successful.
-# Compile of Extend.v was successful.
-# Compile of MuxSrcB.v was successful.
-# Compile of MuxResult.v was successful.
-# Compile of MuxPC.v was successful.
-# Compile of DataPath.v was successful.
-# Compile of Controller.v was successful.
-# 13 compiles, 0 failed with no errors.
+# Compile of Topmodule_tb.v was successful.
+# Compile of TopModule.v was successful.
+# 3 compiles, 0 failed with no errors.
+vsim work.Topmodule_tb
+# vsim work.Topmodule_tb 
+# Start time: 11:08:47 on May 10,2025
+# Loading work.Topmodule_tb
+# Loading work.TopModule
+# Loading work.Controller
+# Loading work.DataPath
+# Loading work.InstructionMemory
+# Loading work.RegisterPC
+# Loading work.AdderPC
+# Loading work.AdderPCTarget
+# Loading work.RegisterFile
+# Loading work.MuxSrcB
+# Loading work.ALU
+# Loading work.DataMemory
+# Loading work.Extend
+# Loading work.MuxResult
+# Loading work.MuxPC
+# ** Warning: (vsim-PLI-3003) [TOFD] - System task or function '$readmem' is not defined.
+#    Time: 0 ps  Iteration: 0  Instance: /Topmodule_tb/uut/dataPath/instrMem File: C:/Users/ASUS/Desktop/ca2/Computer-Architecture/CA2/InstructionMemory.v Line: 9
