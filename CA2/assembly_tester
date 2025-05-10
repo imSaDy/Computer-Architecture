@@ -1,4 +1,4 @@
-addi s0,zero,0
+addi s0,zero,0 
 addi s1,zero,0
 addi s2,zero,0
 addi s3,zero,0
@@ -16,3 +16,19 @@ FOR: beq s5,s4,END_LOOP
     addi s5,s5,1
     jalr ra,6(zero)
 END_LOOP:
+
+00000413
+00000493
+00000913
+00000993
+01400A13
+00000A93
+00890333
+00032303
+0069A3B3
+00038663
+006009B3
+015004B3
+00490913
+001A8A93
+006000E7
