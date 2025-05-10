@@ -22,7 +22,7 @@ module Controller (
                     Jalr = 7'b1100111,
                     LUI= 7'b0110111;
     reg [1:0] ALUOp;
-    reg branch_zero_type;
+    wire branch_zero_type;
     assign branch_zero_type= (funct3==3'b001)? ~Zero : Zero;
     assign PCSrc[0] = (Branch & branch_zero_type)| Jump;
     //Main Decoder
