@@ -6,12 +6,12 @@ module InstructionMemory(
     wire [31:0] address;
 
     initial begin
-        $readmem("InstructionMemory.mem", instrMemory); 
+        $readmemh("InstructionMemory.mem", instrMemory); 
     end
 
     assign address = {PC[31:2], 2'b00}; 
-    assign instr = {instrMemory[address + 3], 
-                    instrMemory[address + 2], 
+    assign instr = {instrMemory[address], 
                     instrMemory[address + 1], 
-                    instrMemory[address]};
+                    instrMemory[address + 2], 
+                    instrMemory[address + 3]};
 endmodule

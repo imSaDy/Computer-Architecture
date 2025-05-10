@@ -16,15 +16,15 @@ module DataMemory(
 
     always @(posedge clk) begin
         if (WE)
-            {dataMemory[address + 3], 
-             dataMemory[address + 2],
-             dataMemory[address + 1], 
-             dataMemory[address]} = WD; 
+            {dataMemory[address], 
+             dataMemory[address + 1],
+             dataMemory[address + 2], 
+             dataMemory[address + 3]} = WD; 
     end
     always @(*) begin
-        RD = {dataMemory[address + 3], 
-              dataMemory[address + 2], 
+        RD = {dataMemory[address], 
               dataMemory[address + 1], 
-              dataMemory[address]}; 
+              dataMemory[address + 2], 
+              dataMemory[address + 3]}; 
     end
 endmodule
