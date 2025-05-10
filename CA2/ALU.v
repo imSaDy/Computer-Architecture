@@ -11,7 +11,7 @@ module ALU(
             3'b001: ALUResult = SrcA - SrcB; 
             3'b010: ALUResult = SrcA & SrcB;
             3'b011: ALUResult = SrcA | SrcB;
-            3'b100: ALUResult = ($signed(SrcA) < $signed(SrcB));
+            3'b101: ALUResult = ($signed(SrcA) < $signed(SrcB));
             default: ALUResult = 32'b0;
         endcase
     end

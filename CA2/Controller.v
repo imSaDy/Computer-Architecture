@@ -20,7 +20,8 @@ module Controller (
                     Sw = 7'b0100011,
                     Btype = 7'b1100011,
                     Jalr = 7'b1100111,
-                    LUI= 7'b0110111;
+                    LUI= 7'b0110111,
+                    Jal = 7'd111;
     reg [1:0] ALUOp;
     wire branch_zero_type;
     assign branch_zero_type= (funct3==3'b001)? ~Zero : Zero;
@@ -89,7 +90,7 @@ module Controller (
                 ALUSrc = 1'b1;
                 ImmSrc = 3'b000;
                 Branch = 1'b0;
-                Jump= 1'b1;
+                Jump = 1'b1;
                 PCSrc[1]=1'b1;
             end
             LUI: begin // lui
@@ -101,6 +102,16 @@ module Controller (
                 ImmSrc = 3'b011;
                 Branch = 1'b0;
                 Jump= 1'b0;
+            end
+            Jal: begin // Jal
+                ALUOp = 2'b00; //aluop is xx
+                RegWrite = 1'b1;
+                MemWrite = 1'b0;
+                ResultSrc = 2'b10;
+                ALUSrc = 1'b0;
+                ImmSrc = 3'b011;
+                Branch = 1'b0;
+                Jump= 1'b1;
             end
         endcase
     end

@@ -1,12 +1,12 @@
-addi s0,zero,0 
-addi s1,zero,0
-addi s2,zero,0
-addi s3,zero,0
+add s0,zero,zero
+add s1,zero,zero
+add s2,zero,zero
+add s3,zero,zero
 addi s4,zero,20
-addi s5,zero,0
+add s5,zero,zero
 FOR: beq s5,s4,END_LOOP
-    add t1,s2,s0
-    lw t1,0(t1)
+    add t3,s2,s0
+    lw t1,0(t3)
     slt t2,s3,t1
     beq t2,zero,END_IF
     add s3,zero,t1
@@ -14,21 +14,5 @@ FOR: beq s5,s4,END_LOOP
     END_IF:
     addi s2,s2,4
     addi s5,s5,1
-    jalr ra,6(zero)
+    jal zero,FOR
 END_LOOP:
-
-00000413
-00000493
-00000913
-00000993
-01400A13
-00000A93
-00890333
-00032303
-0069A3B3
-00038663
-006009B3
-015004B3
-00490913
-001A8A93
-006000E7
