@@ -118,7 +118,7 @@ module Controller (
             2'b01: ALUControl = ALU_SUB; // beq
             2'b10: begin // R-type and I-type
                 case (funct3)
-                    3'b000: ALUControl = ((op==Rtype &funct7==1'b0) | op==Jalr) ? ALU_ADD : ALU_SUB; // add or sub
+                    3'b000: ALUControl = ((((op==Rtype) | (opcode==Itype))&funct7==1'b0 ) | op==Jalr) ? ALU_ADD : ALU_SUB; // add or sub
                     3'b010: ALUControl = ALU_SLT; 
                     3'b110: ALUControl = ALU_OR;
                     3'b111: ALUControl = ALU_AND;
