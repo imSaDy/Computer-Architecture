@@ -42,7 +42,7 @@ module TopModule (
         .WE(WE),
         .ALUSrcA(ALUSrcA),
         .ALUSrcB(ALUSrcB),
-        .ALUop(ALUOp),
+        .ALUOp(ALUOp),
         .ResultSrc(ResultSrc),
         .Instr(Instr),
         .zero(zero)

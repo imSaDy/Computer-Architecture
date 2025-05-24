@@ -10,7 +10,7 @@ module Datapath(
     input stw1,stw2,
     input WE,
     input [1:0] ALUSrcA,ALUSrcB,
-    input wire ALUop,
+    input wire [1:0] ALUOp,
     input ResultSrc,
     output wire [7:5] Instr,
     output wire zero
@@ -18,7 +18,7 @@ module Datapath(
     );
     wire [4:0] PC, PCNext;
     wire [7:0] SrcA, SrcB, ALUResult, RD;
-    wire [1:0] ALUControl;
+    
     wire  Adr;
     wire [7:0] stack_reg_out1, stack_reg_out2;
 
@@ -118,7 +118,7 @@ module Datapath(
     ALU alu_inst(
         .SrcA(SrcA),
         .SrcB(SrcB),
-        .ALUControl(ALUControl),
+        .ALUControl(ALUOp),
         .zero(zero),
         .ALUResult(ALUResult)
     );
