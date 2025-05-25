@@ -7,9 +7,8 @@ module Stack #(parameter WIDTH = 8, DEPTH = 128) (
     input wire [WIDTH-1:0] d_in,
     output reg [WIDTH-1:0] d_out
 );
-
     reg [WIDTH-1:0] stack_mem [0:DEPTH-1];
-    reg [$clog2(DEPTH):0] sp; // Stack pointer
+    reg [$clog2(DEPTH):0] sp;
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -20,11 +19,11 @@ module Stack #(parameter WIDTH = 8, DEPTH = 128) (
                 sp <= sp + 1;
             end else if (pop && sp > 0) begin
                 sp <= sp - 1;
-                d_out <=stack_mem[sp -1];
+                d_out <= stack_mem[sp - 1];
             end else if (tos) begin 
-                d_out <= stack_mem[sp -1];
+                d_out <= stack_mem[sp - 1];
             end
-            
+          
         end
     end
 endmodule

@@ -6,8 +6,7 @@ module Memory(
     output reg [7:0] RD 
 );
     reg [7:0] dataMemory [0:31];
-
-
+    
     initial begin
         $readmemb("DataMemory.mem", dataMemory); 
     end

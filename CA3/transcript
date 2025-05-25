@@ -1,0 +1,82 @@
+# Compile of ALU.v was successful.
+# Compile of Controller.v was successful.
+# Compile of DataPath.v was successful.
+# Compile of Memory.v was successful.
+# Compile of memory_tb.v was successful.
+# Compile of mux2to1.v was successful.
+# Compile of mux4to1.v was successful.
+# Compile of Register.v was successful.
+# Compile of RegisterPC.v was successful.
+# Compile of Stack.v was successful.
+# Compile of Tobmodule_tb.v was successful.
+# Compile of TopModule.v was successful.
+# 12 compiles, 0 failed with no errors.
+vsim -gui work.TopModule_tb
+# vsim -gui work.TopModule_tb 
+# Start time: 09:46:33 on May 25,2025
+# Loading work.TopModule_tb
+# Loading work.TopModule
+# Loading work.Controller
+# Loading work.Datapath
+# Loading work.RegisterPC
+# Loading work.mux2to1
+# Loading work.Memory
+# Loading work.Register
+# Loading work.Stack
+# Loading work.mux4to1
+# Loading work.ALU
+# ** Warning: (vsim-3015) [PCDPC] - Port size (4) does not match connection size (3) for port 'Instr'. The port definition is at: C:/Users/ASUS/Desktop/ca3/Computer-Architecture/CA3/Controller.v(5).
+#    Time: 0 ns  Iteration: 0  Instance: /TopModule_tb/uut/controller_inst File: C:/Users/ASUS/Desktop/ca3/Computer-Architecture/CA3/TopModule.v Line: 11
+add wave -position insertpoint  \
+sim:/TopModule_tb/uut/clk \
+sim:/TopModule_tb/uut/reset \
+sim:/TopModule_tb/uut/WE \
+sim:/TopModule_tb/uut/AdrSrc \
+sim:/TopModule_tb/uut/PCWrite \
+sim:/TopModule_tb/uut/IRWrite \
+sim:/TopModule_tb/uut/tos \
+sim:/TopModule_tb/uut/pop \
+sim:/TopModule_tb/uut/push \
+sim:/TopModule_tb/uut/zero \
+sim:/TopModule_tb/uut/ALUOp \
+sim:/TopModule_tb/uut/ALUSrcA \
+sim:/TopModule_tb/uut/ALUSrcB \
+sim:/TopModule_tb/uut/ResultSrc \
+sim:/TopModule_tb/uut/Instr \
+sim:/TopModule_tb/uut/stw1 \
+sim:/TopModule_tb/uut/stw2
+add wave -position insertpoint  \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/stack_mem
+add wave -position insertpoint  \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/sp
+add wave -position insertpoint  \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/WIDTH \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/DEPTH \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/clk \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/reset \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/push \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/pop \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/tos \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/d_in \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/d_out \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/stack_mem \
+sim:/TopModule_tb/uut/datapath_inst/stack_inst/sp
+# Compile of ALU.v was successful.
+# Compile of Controller.v was successful.
+# Compile of DataPath.v was successful.
+# Compile of Memory.v was successful.
+# Compile of memory_tb.v was successful.
+# Compile of mux2to1.v was successful.
+# Compile of mux4to1.v was successful.
+# Compile of Register.v was successful.
+# Compile of RegisterPC.v was successful.
+# Compile of Stack.v was successful.
+# Compile of Tobmodule_tb.v was successful.
+# Compile of TopModule.v was successful.
+# 12 compiles, 0 failed with no errors.
+run -all
+# ** Note: $stop    : C:/Users/ASUS/Desktop/ca3/Computer-Architecture/CA3/Tobmodule_tb.v(23)
+#    Time: 1010 ns  Iteration: 0  Instance: /TopModule_tb
+# Break in Module TopModule_tb at C:/Users/ASUS/Desktop/ca3/Computer-Architecture/CA3/Tobmodule_tb.v line 23
+# End time: 09:50:30 on May 25,2025, Elapsed time: 0:03:57
+# Errors: 0, Warnings: 7

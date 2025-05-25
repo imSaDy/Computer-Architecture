@@ -2,7 +2,6 @@ module TopModule (
     input wire clk,
     input wire reset
 );
-
     wire WE, AdrSrc, PCWrite, IRWrite, tos, pop, push, zero;
     wire [1:0] ALUOp, ALUSrcA, ALUSrcB, ResultSrc;
     wire [7:0] Instr;
@@ -47,5 +46,4 @@ module TopModule (
         .Instr(Instr),
         .zero(zero)
     );
-
 endmodule

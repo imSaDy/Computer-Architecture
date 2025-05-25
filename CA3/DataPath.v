@@ -30,14 +30,15 @@ module Datapath(
         .PCNext(PCNext),
         .PC(PC)
     );
+    
     wire [4:0] mux_out;
-
     mux2to1 #(.WIDTH(5)) mux_memory_adress(
         .a(PC),
         .b(Instr[4:0]),
         .sel(AdrSrc),
         .y(Adr)
     );
+
     Memory data_instruction_memory(
         .clk(clk),
         .WE(WE),
@@ -45,8 +46,8 @@ module Datapath(
         .WD(stack_reg_out2),
         .RD(RD)
     );
-    wire [4:0] OldPC;
 
+    wire [4:0] OldPC;
     Register #(.WIDTH(8)) reg_instruction(
         .clk(clk),
         .reset(reset),
@@ -62,6 +63,7 @@ module Datapath(
         .d_in(PC),
         .d_out(OldPC)
     );
+
     wire [7:0] Data;
     Register #(.WIDTH(8)) data_register(
         .clk(clk),
@@ -70,7 +72,8 @@ module Datapath(
         .d_in(RD),
         .d_out(Data)
     );
-    wire [7:0] stack_data_in , stack_data_out;
+
+    wire [7:0] stack_data_in, stack_data_out;
     Stack #(.WIDTH(8), .DEPTH(128)) stack_inst(
         .clk(clk),
         .reset(reset),
@@ -82,11 +85,11 @@ module Datapath(
     );
 
     Register #(.WIDTH(8)) reg_stack1(
-    .clk(clk),
-    .reset(reset),
-    .enable(stw1), 
-    .d_in(stack_data_out),
-    .d_out(stack_reg_out1)  
+        .clk(clk),
+        .reset(reset),
+        .enable(stw1), 
+        .d_in(stack_data_out),
+        .d_out(stack_reg_out1)  
     );
 
     Register #(.WIDTH(8)) reg_stack2(
@@ -109,12 +112,11 @@ module Datapath(
     mux4to1 #(.WIDTH(8)) SrcB_Mux(
         .in0(stack_reg_out2),
         .in1(8'b0),
-        .in2({3'b000,Instr[4:0]}),
+        .in2({3'b000, Instr[4:0]}),
         .in3(8'd4),
         .sel(ALUSrcB),
         .out(SrcB)
     );
-
 
     ALU alu_inst(
         .SrcA(SrcA),
@@ -123,6 +125,7 @@ module Datapath(
         .zero(zero),
         .ALUResult(ALUResult)
     );
+
     wire [7:0] ALUOut;
     Register #(.WIDTH(8)) reg_alu_result(
         .clk(clk),
@@ -131,6 +134,7 @@ module Datapath(
         .d_in(ALUResult),
         .d_out(ALUOut)
     );
+
     mux4to1 #(.WIDTH(8)) ALU_Result_Mux(
         .in0(ALUOut),
         .in1(ALUResult),
@@ -139,7 +143,4 @@ module Datapath(
         .sel(ResultSrc),
         .out(Result)
     );
-    
-
-
 endmodule
