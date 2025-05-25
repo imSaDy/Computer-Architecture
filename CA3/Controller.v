@@ -35,7 +35,8 @@ module Controller (
         JUMPZ_STACK1       = 5'd12,
         JUMPZ_ALU_RESULT   = 5'd13,
         PUSH_GET_DATA      = 5'd14,
-        PUSH_PUSH_DATA     = 5'd15;
+        PUSH_PUSH_DATA     = 5'd15,
+        DECODE             = 5'd16;
     parameter [2:0]
         ADD  = 3'b000,
         SUB  = 3'b001,
@@ -56,7 +57,9 @@ module Controller (
         ns = FETCH;
 
         case (ps)
-            FETCH: begin
+            FETCH: ns = DECODE;
+
+            DECODE: begin
                 case (Instr)
                     ADD, SUB, AND, NOT, POP: ns <= POP_FIRST;
                     JMP:                     ns <= JUMP_PC_WRITE;
@@ -95,9 +98,9 @@ module Controller (
 
         case (ps)
             FETCH: begin
-                {AdrSrc, IRWrite, PCWrite} = 3'b111;
+                {AdrSrc, IRWrite, PCWrite} = 3'b011;
                 ALUSrcA    = 2'b00;
-                ALUSrcB    = 2'b01;
+                ALUSrcB    = 2'b11;
                 ALUOp      = 2'b00;
                 ResultSrc  = 2'b01;
             end

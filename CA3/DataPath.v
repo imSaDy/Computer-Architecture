@@ -30,7 +30,7 @@ module Datapath(
         .PCNext(PCNext),
         .PC(PC)
     );
-    
+
     wire [4:0] mux_out;
     mux2to1 #(.WIDTH(5)) mux_memory_adress(
         .a(PC),
@@ -113,7 +113,7 @@ module Datapath(
         .in0(stack_reg_out2),
         .in1(8'b0),
         .in2({3'b000, Instr[4:0]}),
-        .in3(8'd4),
+        .in3(8'd1),
         .sel(ALUSrcB),
         .out(SrcB)
     );
