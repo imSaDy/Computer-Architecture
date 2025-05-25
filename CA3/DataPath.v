@@ -74,7 +74,7 @@ module Datapath(
     );
 
     wire [7:0] stack_data_in, stack_data_out;
-    Stack #(.WIDTH(8), .DEPTH(128)) stack_inst(
+    Stack #(.WIDTH(8), .DEPTH(32)) stack_inst(
         .clk(clk),
         .reset(reset),
         .push(push),
