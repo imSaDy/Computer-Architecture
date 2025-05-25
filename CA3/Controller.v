@@ -61,36 +61,36 @@ module Controller (
 
             DECODE: begin
                 case (Instr)
-                    ADD, SUB, AND, NOT, POP: ns <= POP_FIRST;
-                    JMP:                     ns <= JUMP_PC_WRITE;
-                    JZ:                      ns <= JUMPZ_TOS;
-                    PUSH:                    ns <= PUSH_GET_DATA;
+                    ADD, SUB, AND, NOT, POP: ns = POP_FIRST;
+                    JMP:                     ns = JUMP_PC_WRITE;
+                    JZ:                      ns = JUMPZ_TOS;
+                    PUSH:                    ns = PUSH_GET_DATA;
                 endcase
             end
 
             POP_FIRST: begin
                 case (Instr)
-                    ADD, SUB, AND: ns <= POP_SECOND;
-                    NOT:           ns <= WRITE_STACK1;
-                    POP:           ns <= POP_WRITE_STACK2;
+                    ADD, SUB, AND: ns = POP_SECOND;
+                    NOT:           ns = WRITE_STACK1;
+                    POP:           ns = POP_WRITE_STACK2;
                 endcase
             end
 
-            POP_SECOND:       ns <= R_WRITE_STACK2;
-            R_WRITE_STACK2:   ns <= R_ALURESULT;
-            R_ALURESULT:      ns <= PUSH_RESULT;
-            WRITE_STACK1:     ns <= NOT_ALU_RESULT;
-            NOT_ALU_RESULT:   ns <= PUSH_RESULT;
-            POP_WRITE_STACK2: ns <= WRITE_MEMORY;
-            JUMPZ_TOS:        ns <= JUMPZ_STACK1;
-            JUMPZ_STACK1:     ns <= JUMPZ_ALU_RESULT;
-            PUSH_GET_DATA:    ns <= PUSH_PUSH_DATA;
+            POP_SECOND:       ns = R_WRITE_STACK2;
+            R_WRITE_STACK2:   ns = R_ALURESULT;
+            R_ALURESULT:      ns = PUSH_RESULT;
+            WRITE_STACK1:     ns = NOT_ALU_RESULT;
+            NOT_ALU_RESULT:   ns = PUSH_RESULT;
+            POP_WRITE_STACK2: ns = WRITE_MEMORY;
+            JUMPZ_TOS:        ns = JUMPZ_STACK1;
+            JUMPZ_STACK1:     ns = JUMPZ_ALU_RESULT;
+            PUSH_GET_DATA:    ns = PUSH_PUSH_DATA;
 
             PUSH_PUSH_DATA,
             JUMPZ_ALU_RESULT,
             WRITE_MEMORY,
             PUSH_RESULT,
-            JUMP_PC_WRITE:    ns <= FETCH;
+            JUMP_PC_WRITE:    ns = FETCH;
         endcase
     end
     always @(ps, zero) begin

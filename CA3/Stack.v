@@ -23,7 +23,6 @@ module Stack #(parameter WIDTH = 8, DEPTH = 128) (
             end else if (tos) begin 
                 d_out <= stack_mem[sp - 1];
             end
-          
         end
     end
 endmodule

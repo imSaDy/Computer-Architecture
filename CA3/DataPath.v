@@ -27,7 +27,7 @@ module Datapath(
         .clk(clk),
         .reset(reset),
         .enable(PCWrite),  
-        .PCNext(PCNext),
+        .PCNext(Result),
         .PC(PC)
     );
 
