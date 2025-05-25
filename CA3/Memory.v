@@ -5,7 +5,7 @@ module Memory(
     input [7:0] WD,
     output reg [7:0] RD 
 );
-    reg [7:0] dataMemory [0:32];
+    reg [7:0] dataMemory [0:31];
 
 
     initial begin

@@ -11,16 +11,17 @@ module Datapath(
     input WE,
     input [1:0] ALUSrcA,ALUSrcB,
     input wire [1:0] ALUOp,
-    input ResultSrc,
-    output wire [7:5] Instr,
+    input [1:0] ResultSrc,
+    output wire [7:0] Instr,
     output wire zero
 
     );
     wire [4:0] PC, PCNext;
     wire [7:0] SrcA, SrcB, ALUResult, RD;
     
-    wire  Adr;
+    wire [4:0] Adr;
     wire [7:0] stack_reg_out1, stack_reg_out2;
+    wire [7:0] Result;
 
     RegisterPC registerPC_inst(
         .clk(clk),
@@ -44,7 +45,7 @@ module Datapath(
         .WD(stack_reg_out2),
         .RD(RD)
     );
-    wire [7:0] OldPC;
+    wire [4:0] OldPC;
 
     Register #(.WIDTH(8)) reg_instruction(
         .clk(clk),
@@ -54,7 +55,7 @@ module Datapath(
         .d_out(Instr)
     );
 
-    Register #(.WIDTH(8)) reg_oldPC(
+    Register #(.WIDTH(5)) reg_oldPC(
         .clk(clk),
         .reset(reset),
         .enable(IRWrite), 
@@ -62,7 +63,7 @@ module Datapath(
         .d_out(OldPC)
     );
     wire [7:0] Data;
-    Register #(.WIDTH(8)) data_memory(
+    Register #(.WIDTH(8)) data_register(
         .clk(clk),
         .reset(reset),
         .enable(1'b1), 
@@ -76,8 +77,8 @@ module Datapath(
         .push(push),
         .pop(pop),
         .tos(tos),
-        .d_in(stack_data_in),
-        .d_out(stack_data_in)
+        .d_in(Result),
+        .d_out(stack_data_out)
     );
 
     Register #(.WIDTH(8)) reg_stack1(
@@ -97,8 +98,8 @@ module Datapath(
     );
 
     mux4to1 #(.WIDTH(8)) SrcA_Mux(
-        .in0(PC), 
-        .in1(OldPC), 
+        .in0({3'b000, PC}), 
+        .in1({3'b000, OldPC}), 
         .in2(stack_reg_out1), 
         .in3(8'b0), 
         .sel(ALUSrcA), 
@@ -108,7 +109,7 @@ module Datapath(
     mux4to1 #(.WIDTH(8)) SrcB_Mux(
         .in0(stack_reg_out2),
         .in1(8'b0),
-        .in2(Instr[4:0]),
+        .in2({3'b000,Instr[4:0]}),
         .in3(8'd4),
         .sel(ALUSrcB),
         .out(SrcB)
@@ -134,9 +135,9 @@ module Datapath(
         .in0(ALUOut),
         .in1(ALUResult),
         .in2(Data),
-        .in3(Instr[4:0]),
+        .in3({3'b000, Instr[4:0]}),
         .sel(ResultSrc),
-        .out(SrcB)
+        .out(Result)
     );
     
 

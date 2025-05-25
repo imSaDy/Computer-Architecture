@@ -62,7 +62,7 @@ module memory_tb;
         $display("Read Addr 10: RD = %b (should be 11110000)", RD);
 
         // Test 6: Read from an unwritten address (e.g., 20)
-        A = 20;
+        A = 25;
         WE = 0;
         #10;
         $display("Read Addr 20: RD = %b (should be initial value)", RD);

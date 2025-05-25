@@ -5,14 +5,14 @@ module TopModule (
 
     wire WE, AdrSrc, PCWrite, IRWrite, tos, pop, push, zero;
     wire [1:0] ALUOp, ALUSrcA, ALUSrcB, ResultSrc;
-    wire [7:5] Instr;
+    wire [7:0] Instr;
     wire stw1, stw2;
 
     Controller controller_inst (
         .clk(clk),
         .reset(reset),
         .zero(zero),
-        .Instr(Instr[7:4]), 
+        .Instr(Instr[7:5]), 
         .WE(WE),
         .AdrSrc(AdrSrc),
         .PCWrite(PCWrite),
