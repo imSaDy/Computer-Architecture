@@ -28,7 +28,10 @@ module Controller (
         POP_STACK_SAVE_MEM = 5'd5,
         JUMP               = 5'd6,
         SAVE_TOP_STACK     = 5'd7,
-        CHECK_TOP_ZERO     = 5'd8;
+        CHECK_TOP_ZERO     = 5'd8,
+        SAVE1_TOP_AND_POP  = 5'd9,
+        SAVE2_TOP_AND_POP  = 5'd10,
+        CALCULATE_AND_PUSH = 5'd11;
 
     parameter [2:0]
         ADD  = 3'b000,
@@ -54,9 +57,7 @@ module Controller (
 
             DECODE: begin
                 case (Instr)
-                    // ADD, SUB, AND, NOT, POP: ns = POP_FIRST;
-                    // JMP:                     ns = JUMP_PC_WRITE;
-                    // JZ:                      ns = JUMPZ_TOS;
+                    ADD, SUB, AND, NOT:      ns = SAVE1_TOP_AND_POP;
                     JZ:                      ns = SAVE_TOP_STACK;
                     JMP:                     ns = JUMP;
                     PUSH:                    ns = SAVE_DATA_FOR_PUSH;
@@ -68,7 +69,10 @@ module Controller (
             SAVE_POP_DATA:         ns = POP_STACK_SAVE_MEM;
             SAVE_TOP_STACK:        ns = CHECK_TOP_ZERO;
             CHECK_TOP_ZERO:        ns = zero ? JUMP : FETCH;
+            SAVE1_TOP_AND_POP:     ns = SAVE2_TOP_AND_POP;
+            SAVE2_TOP_AND_POP:     ns = CALCULATE_AND_PUSH;
 
+            CALCULATE_AND_PUSH,
             JUMP,
             POP_STACK_SAVE_MEM,
             PUSH_DATA_IN_STACK:    ns = FETCH;
@@ -112,6 +116,24 @@ module Controller (
                 ALUSrcA     = 2'b10;
                 ALUSrcB     = 2'b01;
                 ALUOp  = 2'b00;
+            end
+
+            SAVE1_TOP_AND_POP: begin
+                stw1 = 1'b1;
+                pop  = 1'b1;
+            end
+
+            SAVE2_TOP_AND_POP: begin
+                stw2 = 1'b1;
+                pop  = 1'b1;
+            end
+
+            CALCULATE_AND_PUSH: begin
+                ResultSrc = 2'b01; 
+                ALUSrcA   = 2'b10; 
+                ALUSrcB   = 2'b00;
+                ALUOp     = Instr[1:0];
+                push      = 1'b1;
             end
         endcase
     end
