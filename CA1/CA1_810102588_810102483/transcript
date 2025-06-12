@@ -1,0 +1,93 @@
+# Compile of Adder.v was successful.
+# Compile of Controller.v was successful with warnings.
+# Compile of Counter.v was successful.
+# Compile of Datapath.v was successful.
+# Compile of decoder.v was successful.
+# Compile of dff.v was successful.
+# Compile of memory2.v was successful.
+# Compile of mux.v was successful.
+# Compile of queue.v was successful.
+# Compile of queue_moves.v was successful.
+# Compile of Register.v was successful.
+# Compile of stack.v was successful.
+# Compile of Topmodule.v was successful.
+# 13 compiles, 0 failed with no errors.
+# Load canceled
+# Compile of Adder.v was successful.
+# Compile of Controller.v was successful with warnings.
+# Compile of Counter.v was successful.
+# Compile of Datapath.v was successful.
+# Compile of decoder.v was successful.
+# Compile of dff.v was successful.
+# Compile of memory2.v was successful.
+# Compile of mux.v was successful.
+# Compile of queue.v was successful.
+# Compile of queue_moves.v was successful.
+# Compile of Register.v was successful.
+# Compile of stack.v was successful.
+# Compile of Topmodule.v was successful.
+# Compile of Topmodule_tb.v was successful.
+# 14 compiles, 0 failed with no errors.
+vsim work.Topmodule_tb
+# vsim work.Topmodule_tb 
+# Start time: 23:27:28 on Apr 11,2025
+# Loading work.Topmodule_tb
+# Loading work.topmodule
+# Loading work.controller
+# Loading work.datapath
+# Loading work.Counter
+# Loading work.Register
+# Loading work.Adder
+# Loading work.mux
+# Loading work.stack
+# Loading work.queue
+# Loading work.queue_logger
+# Loading work.memory2
+# Loading work.dff
+vsim work.Topmodule_tb
+# End time: 23:27:41 on Apr 11,2025, Elapsed time: 0:00:13
+# Errors: 0, Warnings: 19
+# vsim work.Topmodule_tb 
+# Start time: 23:27:41 on Apr 11,2025
+# Loading work.Topmodule_tb
+# Loading work.topmodule
+# Loading work.controller
+# Loading work.datapath
+# Loading work.Counter
+# Loading work.Register
+# Loading work.Adder
+# Loading work.mux
+# Loading work.stack
+# Loading work.queue
+# Loading work.queue_logger
+# Loading work.memory2
+# Loading work.dff
+add wave -position insertpoint  \
+sim:/Topmodule_tb/clk \
+sim:/Topmodule_tb/load_memory \
+sim:/Topmodule_tb/reset \
+sim:/Topmodule_tb/start \
+sim:/Topmodule_tb/run \
+sim:/Topmodule_tb/done \
+sim:/Topmodule_tb/fail \
+sim:/Topmodule_tb/move \
+sim:/Topmodule_tb/end_iteration \
+sim:/Topmodule_tb/rd \
+sim:/Topmodule_tb/wr \
+sim:/Topmodule_tb/Din \
+sim:/Topmodule_tb/Dout \
+sim:/Topmodule_tb/memory_x_input \
+sim:/Topmodule_tb/memory_y_input
+run -all
+# Time: 0 | reset: 0 | start: 0 | run: 0 | done: 0 | fail: 0 | move: xx | end: x
+# Time: 5 | reset: 0 | start: 0 | run: 0 | done: 0 | fail: 0 | move: 00 | end: x
+# Time: 10 | reset: 1 | start: 0 | run: 0 | done: 0 | fail: 0 | move: 00 | end: x
+# Time: 20 | reset: 0 | start: 0 | run: 0 | done: 0 | fail: 0 | move: 00 | end: x
+# Time: 50 | reset: 0 | start: 1 | run: 0 | done: 0 | fail: 0 | move: 00 | end: x
+# Time: 60 | reset: 0 | start: 0 | run: 0 | done: 0 | fail: 0 | move: 00 | end: x
+# Time: 41545 | reset: 0 | start: 0 | run: 0 | done: 0 | fail: 1 | move: 00 | end: x
+# Time: 41555 | reset: 0 | start: 0 | run: 0 | done: 0 | fail: 0 | move: 00 | end: x
+# Break key hit
+# Break in Module Topmodule_tb at C:/Users/ASUS/Desktop/CA1_810102588_810102483/Topmodule_tb.v line 43
+# End time: 23:28:03 on Apr 11,2025, Elapsed time: 0:00:22
+# Errors: 0, Warnings: 2
