@@ -16,6 +16,7 @@ module Decode_register (
     input wire [4:0] Rs2D,
     input wire [4:0] RdD,
     input wire [31:0] ImmExtD,
+    input wire LuiD,
     input wire PCPlus4D,
     output reg JalrE,
     output reg RegWriteE,
@@ -32,7 +33,8 @@ module Decode_register (
     output reg [4:0] Rs2E,
     output reg [4:0] RdE,
     output reg [31:0] ImmExtE,
-    output reg [31:0] PCPlus4E
+    output reg [31:0] PCPlus4E,
+    output reg LuiE
 
 );
 

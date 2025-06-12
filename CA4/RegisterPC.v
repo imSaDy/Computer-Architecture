@@ -1,5 +1,5 @@
 module RegisterPC(
-    input clk, reset,
+    input clk, reset, EN,
     input [31:0] PCNext,
     output reg [31:0] PC
 );
@@ -7,10 +7,10 @@ module RegisterPC(
         PC = 32'd0;
     end
 
-    always @(posedge clk, posedge reset) begin
-        if (reset)
+    always @(posedge clk, negedge reset) begin
+        if (!reset)
             PC <= 32'd0; 
-        else 
+        else if (!EN)
             PC <= PCNext; 
     end
 endmodule

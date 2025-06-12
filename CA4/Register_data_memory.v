@@ -7,7 +7,6 @@ module DataMemory_register (
     input wire [31:0] PCPlus4M,
     input wire        RegWriteM,
     input wire [1:0]  ResultSrcM,
-    input wire        MemWriteM,
 
     output reg [31:0] ALUResultW,
     output reg [31:0] ReadDataW,
@@ -15,7 +14,7 @@ module DataMemory_register (
     output reg [31:0] PCPlus4W,
     output reg        RegWriteW,
     output reg [1:0]  ResultSrcW,
-    output reg        MemWriteW
+
 );
 
 always @(posedge clk) begin
@@ -26,7 +25,6 @@ always @(posedge clk) begin
         PCPlus4W   <= 32'b0;
         RegWriteW  <= 1'b0;
         ResultSrcW <= 2'b0;
-        MemWriteW  <= 1'b0;
     end else begin
         ALUResultW <= ALUResultM;
         ReadDataW  <= ReadDataM;
@@ -34,7 +32,6 @@ always @(posedge clk) begin
         PCPlus4W   <= PCPlus4M;
         RegWriteW  <= RegWriteM;
         ResultSrcW <= ResultSrcM;
-        MemWriteW  <= MemWriteM;
     end
 end
 

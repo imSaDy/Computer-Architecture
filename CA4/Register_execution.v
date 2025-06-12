@@ -1,4 +1,4 @@
-module ALU_execution (
+module Execution_register (
     input wire clk,
     input wire clear,
     input wire RegWriteE,
