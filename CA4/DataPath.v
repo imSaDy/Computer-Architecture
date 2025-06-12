@@ -3,46 +3,69 @@ module DataPath(
     input reset,
     //controller inputs
     input MemWriteD,
-    input RegWriteDD,
+    input RegWriteD,
     input ALUSrcD,
     input JumpD,
     input BranchD,
-    input ALUSrcD,
     input [2:0] ALUControlD,
     input [2:0] ImmSrcD,
     input [1:0] ResultSrcD,
-    input [1:0] PCSrcD,
     input LuiD,
-
+    input JalrD,
+    input StallD,StallF,FlushD,FlushE,
+    input [1:0] ForwardAE,ForwardBE,
     output zero,
     output [2:0] func3,
     output [6:0] func7,
-    output [6:0] opcode
+    output [6:0] opcode,
+    output wire [4:0] Rs1D,Rs2D,Rs1E,Rs2E,RdE,RdM,RdW,
+    output wire PCSrcE,
+    output wire [1:0] ResultSrcE,
+    output wire RegWriteM,RegWriteW
 );
     wire [31:0] InstrD, PCD; 
     wire [31:0] PCNext;
     wire [31:0] PCPlus4; 
-    wire [31:0] PCTarget, ImmExt; 
-    wire [4:0] A1, A2, A3; 
-    wire [31:0] WD3, RD1, RD2;
+    wire [31:0] PCTarget, ImmExt;  
+    wire [31:0] RD1, RD2;
     wire [31:0] SrcBE;
     wire [31:0] ALUResult; 
-    wire [31:0] RD;
-    wire [31:0] Result;
     wire [31:0] PCF,PCF_next;
     
     assign func3 = InstrD[14:12];
     assign func7 = InstrD[31:25];
+    wire  [2:0] func3E;
     assign opcode = InstrD[6:0];
-    assign WD3 = Result;
+    wire [31:0] WriteDataE, PCTargetE;
+    wire [31:0] PCPlus4F;
     wire [31:0] InstrF;
-
+    wire JalrE, RegWriteE, MemWriteE, JumpE, BranchE, ALUSrcE,LuiE;
+    wire [31:0] RD1D,RD2D;
+    wire [31:0] ResultW;
+    wire [4:0] RdD;
+    assign Rs1D = InstrD [19:15];
+    assign Rs2D = InstrD [24:20];
+    assign RdD  = InstrD [11:7];
+    wire [2:0] ALUControlE;
+    wire [31:0] RD1E, RD2E, PCE, ImmExtE, PCPlus4E;
+    wire [31:0] Lui_mux_output, ALUResultM,SrcAE; 
+    wire [31:0] ALUResultE;
+    wire [31:0] ReadDataM, PCPlus4M;
+    wire MemWriteM;
+    wire [1:0] ResultSrcM;
+    wire [31:0] WriteDataM;
+    wire [31:0] ALUResultW, ReadDataW, PCPlus4W;
+    wire  MemWriteW;
+    wire [1:0] ResultSrcW;
+    wire [31:0] PCPlus4D;
+    wire [31:0] Forwading_A_result;
+    wire [31:0] ImmExtD;
+    wire [31:0] Jalr_mux_output;
+    wire HasBranchCondition;
     //fetch stage
-   
-
     MuxPC muxPC(
-        .PCSrc(PCSrc),
-        .PCPlus4(PCPlus4),
+        .PCSrc(PCSrcE),
+        .PCPlus4(PCPlus4F),
         .PCTarget(PCTargetE),
         .PCNext(PCF_next)
     );
@@ -62,13 +85,10 @@ module DataPath(
         .PCPlus4(PCPlus4F)
     );
 
-    wire [31:0] InstrD;
-    wire [31:0] PCD;
-    wire [31:0] PCPlus4D;
     Fetch_register fetch_register(
         .clk(clk),
-        .EN(/*TODO: comes from hazard unit*/ ),
-        .clear(/*TODO: comes from hazard unit*/),
+        .EN(StallD ),
+        .clear(FlushD),
         .InstrF(InstrF),
         .PCF(PCF),
         .PCPlus4F(PCPlus4F),
@@ -77,26 +97,18 @@ module DataPath(
         .PCPlus4D(PCPlus4D)   
     );
 
-
     //decode stage
-    assign A1 = InstrD[19:15];
-    assign A2 = InstrD[24:20];
-    assign A3 = InstrD[11:7];
-    wire RegWriteW;
-    wire [31:0] RD1D,RD2D;
-    wire [31:0] ResultW;
     RegisterFile registerFile(
         .clk(clk),
         .reset(reset),
         .WE3(RegWriteW),
-        .A1(A1),
-        .A2(A2),
-        .A3(A3),
+        .A1(Rs1D),
+        .A2(Rs2D),
+        .A3(RdW),
         .WD3(ResultW),
         .RD1(RD1D),
         .RD2(RD2D)
     );
-    wire [31:0] ImmExtD;
     Extend extend(
         .instr(InstrD),
         .ImmSrc(ImmSrcD),
@@ -104,18 +116,13 @@ module DataPath(
     );
 
 
-    wire JalrE, RegWriteE, MemWriteE, JumpE, BranchE, ALUSrcE,LuiE;
-    wire [1:0] ResultSrcE;
-    wire [2:0] ALUControlE;
-    wire [31:0] RD1E, RD2E, PCE, ImmExtE, PCPlus4E;
-    wire [4:0] Rs1E, Rs2E, RdE;
     // Instantiate Decode_register
     Decode_register decode_register (
         
         .clk(clk),
-        .clear(/* TODO: connect to hazard unit  */),
+        .clear(FlushE),
         .JalrD(JalrD), 
-        .RegWriteD(RegWriteDD),
+        .RegWriteD(RegWriteD),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
         .JumpD(JumpD), 
@@ -125,12 +132,13 @@ module DataPath(
         .RD1D(RD1D),
         .RD2D(RD2D),
         .PCD(PCD),
-        .Rs1D(A1),
-        .Rs2D(A2),
-        .RdD(A3),
+        .Rs1D(Rs1D),
+        .Rs2D(Rs2D),
+        .RdD(RdD),
         .ImmExtD(ImmExtD),
         .PCPlus4D(PCPlus4D),
         .LuiD(LuiD), 
+        .funct3D(func3),
         //output wires
         .JalrE(JalrE),
         .RegWriteE(RegWriteE),
@@ -147,17 +155,11 @@ module DataPath(
         .Rs2E(Rs2E),
         .RdE(RdE),
         .ImmExtE(ImmExtE),
-        .PCPlus4E(PCPlus4E).
-        .LuiE(LuiE) 
+        .PCPlus4E(PCPlus4E),
+        .LuiE(LuiE),
+        .funct3E(func3E)  
     );
     
-    wire [31:0] Lui_mux_output, ALUResultM,SrcAE; 
-    wire [31:0] WriteDataE, PCTargetE;
-    wire [31:0] ALUResultE, PCPlus4E;
-    wire [4:0] RdE;
-    wire RegWriteE, MemWriteE;
-    wire [1:0] ResultSrcE;
-
 
     Mux2to1 #(.WIDTH(32)) Lui_select (
         .a(32'b0),
@@ -165,7 +167,6 @@ module DataPath(
         .sel(LuiE),
         .y(Lui_mux_output)
     );
-    wire [31:0] Forwading_A_result;
     Mux4to1 #(.WIDTH(32)) Forwarding_A (
         .a(Lui_mux_output),
         .b(ResultW),
@@ -182,7 +183,6 @@ module DataPath(
         .sel(ForwardBE), //TODO hazard unit
         .y(WriteDataE)
     );
-    wire [31:0] Jalr_mux_output;
     Mux2to1 #(.WIDTH(32)) Jalr_mux(
         .a(ImmExtE),
         .b(RD1E),
@@ -208,12 +208,18 @@ module DataPath(
         .ALUResult(ALUResultE)
     );
 
+    Mux2to1 #(.WIDTH(1)) Beq_mux(
+        .a(zero),
+        .b(~zero),
+        .sel(func3E == 3'b001),
+        .y(HasBranchCondition)
+    );
+    wire AcceptBranch;
+    assign AcceptBranch = BranchE & HasBranchCondition;  
+    assign PCSrcE = JumpE |  AcceptBranch; 
+
     //write Back stage
-    wire [31:0] ReadDataM, PCPlus4M;
-    wire [4:0] RdM;
-    wire RegWriteM, MemWriteM;
-    wire [1:0] ResultSrcM;
-    wire [31:0] WriteDataM;
+
     Execution_register alu_execution (
         .clk(clk),
         .clear(reset),
@@ -241,12 +247,6 @@ module DataPath(
     );
 
 
-    wire [31:0] ALUResultW, ReadDataW, PCPlus4W;
-    wire [4:0] RdW;
-    wire  MemWriteW;
-    wire [1:0] ResultSrcW;
-
-
     //memory stage
     DataMemory_register dataMemory_register (
         .clk(clk),
@@ -270,7 +270,7 @@ module DataPath(
         .ResultSrc(ResultSrcW),
         .ALUResult(ALUResultW),
         .RD(ReadDataW),
-        .PCPlus4(PCPlus4),
+        .PCPlus4(PCPlus4W),
         .Result(ResultW)
     );
 endmodule

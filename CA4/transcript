@@ -1,17 +1,19 @@
+# Loading project CA4
 # Compile of AdderPC.v was successful.
 # Compile of AdderPCTarget.v was successful.
 # Compile of ALU.v was successful.
-# Compile of Controller.v failed with 1 errors.
+# Compile of Controller.v was successful.
 # Compile of DataMemory.v was successful.
-# Compile of DataPath.v failed with 10 errors.
+# Compile of DataPath.v was successful.
 # Compile of Extend.v was successful.
+# Compile of HazardUnit.v was successful.
 # Compile of InstructionMemory.v was successful.
 # Compile of Mux2to1.v was successful.
 # Compile of Mux4to1.v was successful.
 # Compile of MuxPC.v was successful.
 # Compile of MuxResult.v was successful.
 # Compile of MuxSrcB.v was successful.
-# Compile of Register_data_memory.v failed with 1 errors.
+# Compile of Register_data_memory.v was successful.
 # Compile of Register_decode.v was successful.
 # Compile of Register_execution.v was successful.
 # Compile of Register_fetch.v was successful.
@@ -19,16 +21,151 @@
 # Compile of RegisterPC.v was successful.
 # Compile of TopModule.v was successful.
 # Compile of Topmodule_tb.v was successful.
-# 21 compiles, 3 failed with 12 errors.
-# Compile of Controller.v was successful.
-# Compile of DataPath.v failed with 10 errors.
-# Compile of Register_data_memory.v failed with 1 errors.
-# 3 compiles, 2 failed with 11 errors.
-# Compile of DataPath.v failed with 10 errors.
-# Compile of Register_data_memory.v failed with 1 errors.
-# Compile of HazardUnit.v failed with 1 errors.
-# 3 compiles, 3 failed with 12 errors.
-# Compile of DataPath.v failed with 10 errors.
-# Compile of Register_data_memory.v failed with 1 errors.
-# Compile of HazardUnit.v was successful.
-# 3 compiles, 2 failed with 11 errors.
+# 22 compiles, 0 failed with no errors.
+vsim work.Topmodule_tb
+# vsim work.Topmodule_tb 
+# Start time: 01:48:02 on Jun 13,2025
+# Loading work.Topmodule_tb
+# Loading work.TopModule
+# Loading work.Controller
+# Loading work.HazardUnit
+# Loading work.DataPath
+# Loading work.MuxPC
+# Loading work.RegisterPC
+# Loading work.InstructionMemory
+# Loading work.AdderPC
+# Loading work.Fetch_register
+# Loading work.RegisterFile
+# Loading work.Extend
+# Loading work.Decode_register
+# Loading work.Mux2to1
+# Loading work.Mux4to1
+# Loading work.AdderPCTarget
+# Loading work.ALU
+# Loading work.Execution_register
+# Loading work.DataMemory
+# Loading work.DataMemory_register
+# Loading work.MuxResult
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/controller_inst/ALU_ADD \
+sim:/Topmodule_tb/uut/controller_inst/ALU_AND \
+sim:/Topmodule_tb/uut/controller_inst/ALU_OR \
+sim:/Topmodule_tb/uut/controller_inst/ALU_SLT \
+sim:/Topmodule_tb/uut/controller_inst/ALU_SUB \
+sim:/Topmodule_tb/uut/controller_inst/ALUControlD \
+sim:/Topmodule_tb/uut/controller_inst/ALUOp \
+sim:/Topmodule_tb/uut/controller_inst/ALUSrcD \
+sim:/Topmodule_tb/uut/controller_inst/branch_zero_type \
+sim:/Topmodule_tb/uut/controller_inst/BranchD \
+sim:/Topmodule_tb/uut/controller_inst/Btype \
+sim:/Topmodule_tb/uut/controller_inst/funct3 \
+sim:/Topmodule_tb/uut/controller_inst/funct7 \
+sim:/Topmodule_tb/uut/controller_inst/ImmSrcD \
+sim:/Topmodule_tb/uut/controller_inst/Itype \
+sim:/Topmodule_tb/uut/controller_inst/Jal \
+sim:/Topmodule_tb/uut/controller_inst/Jalr \
+sim:/Topmodule_tb/uut/controller_inst/JalrD \
+sim:/Topmodule_tb/uut/controller_inst/JumpD \
+sim:/Topmodule_tb/uut/controller_inst/LUI \
+sim:/Topmodule_tb/uut/controller_inst/LuiD \
+sim:/Topmodule_tb/uut/controller_inst/Lw \
+sim:/Topmodule_tb/uut/controller_inst/MemWriteD \
+sim:/Topmodule_tb/uut/controller_inst/op \
+sim:/Topmodule_tb/uut/controller_inst/PCSrcD \
+sim:/Topmodule_tb/uut/controller_inst/RegWriteD \
+sim:/Topmodule_tb/uut/controller_inst/ResultSrc \
+sim:/Topmodule_tb/uut/controller_inst/Rtype \
+sim:/Topmodule_tb/uut/controller_inst/Sw \
+sim:/Topmodule_tb/uut/controller_inst/Zero
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/datapath_inst/func3 \
+sim:/Topmodule_tb/uut/datapath_inst/func3E \
+sim:/Topmodule_tb/uut/datapath_inst/func7
+restart
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/datapath_inst/PCF
+restart
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/datapath_inst/instrMem/instr \
+sim:/Topmodule_tb/uut/datapath_inst/instrMem/PC
+restart
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/datapath_inst/fetch_register/EN \
+sim:/Topmodule_tb/uut/datapath_inst/fetch_register/InstrD \
+sim:/Topmodule_tb/uut/datapath_inst/fetch_register/InstrF
+restart
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/hazard_unit_inst/StallD
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/hazard_unit_inst/lwStall
+restart
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18
+add wave -position insertpoint  \
+sim:/Topmodule_tb/uut/hazard_unit_inst/FlushD \
+sim:/Topmodule_tb/uut/hazard_unit_inst/FlushE \
+sim:/Topmodule_tb/uut/hazard_unit_inst/ForwardAE \
+sim:/Topmodule_tb/uut/hazard_unit_inst/ForwardBE \
+sim:/Topmodule_tb/uut/hazard_unit_inst/lwStall \
+sim:/Topmodule_tb/uut/hazard_unit_inst/PCSrcE \
+sim:/Topmodule_tb/uut/hazard_unit_inst/RdE \
+sim:/Topmodule_tb/uut/hazard_unit_inst/RdM \
+sim:/Topmodule_tb/uut/hazard_unit_inst/RdW \
+sim:/Topmodule_tb/uut/hazard_unit_inst/RegWriteM \
+sim:/Topmodule_tb/uut/hazard_unit_inst/RegWriteW \
+sim:/Topmodule_tb/uut/hazard_unit_inst/ResultSrcE \
+sim:/Topmodule_tb/uut/hazard_unit_inst/Rs1D \
+sim:/Topmodule_tb/uut/hazard_unit_inst/Rs1E \
+sim:/Topmodule_tb/uut/hazard_unit_inst/Rs2D \
+sim:/Topmodule_tb/uut/hazard_unit_inst/Rs2E \
+sim:/Topmodule_tb/uut/hazard_unit_inst/StallD \
+sim:/Topmodule_tb/uut/hazard_unit_inst/StallF
+restart
+run -all
+# Time: 0 | Reset: 1 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# Time: 100 | Reset: 0 | Opcode: xxxxxxx | Func3: xxx | Func7: xxxxxxx | Zero: x
+# ** Note: $stop    : /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v(18)
+#    Time: 40100 ns  Iteration: 0  Instance: /Topmodule_tb
+# Break in Module Topmodule_tb at /home/wren/D/1S4/CA/CA/CA4/Topmodule_tb.v line 18

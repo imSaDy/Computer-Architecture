@@ -3,18 +3,18 @@ module Controller (
     input[2:0] funct3,
     input funct7,
     input Zero,
-    output reg RegWrite,
-    output reg MemWrite,
+    output reg RegWriteD,
+    output reg MemWriteD,
     output reg [1:0] ResultSrc,
-    output reg ALUSrc,
-    output reg [2:0] ALUControl,
-    output reg [2:0] ImmSrc,
+    output reg ALUSrcD,
+    output reg [2:0] ALUControlD,
+    output reg [2:0] ImmSrcD,
     output reg JalrD,
-    output reg PCSrc,
+    output reg PCSrcD,
     output reg LuiD,
-    output reg Jump,
-    output reg Branch,
-    output reg Beq
+    output reg JumpD,
+    output reg BranchD
+    
 );
     parameter [6:0]  Rtype = 7'b0110011,
                     Itype = 7'b0010011,
@@ -26,96 +26,95 @@ module Controller (
                     Jal = 7'd111;
     reg [1:0] ALUOp;
     wire branch_zero_type;
-    assign Beq = (funct3 == 3'b001);
     assign branch_zero_type= (funct3==3'b001)? ~Zero : Zero;
-    assign PCSrc = (Branch & branch_zero_type)| Jump;
+    assign PCSrcD = (BranchD & branch_zero_type)| JumpD;
     //Main Decoder
     always @(op) begin
-        {PCSrc,RegWrite,MemWrite,ResultSrc,ALUSrc,ImmSrc,Branch,Jump,JalrD,LuiD} = 16'b0;
+        {PCSrcD,RegWriteD,MemWriteD,ResultSrc,ALUSrcD,ImmSrcD,BranchD,JumpD,JalrD,LuiD} = 16'b0;
         case (op)
             Rtype: begin // R-type
                 ALUOp = 2'b10;
-                RegWrite = 1'b1;
-                MemWrite = 1'b0;
+                RegWriteD = 1'b1;
+                MemWriteD = 1'b0;
                 ResultSrc = 2'b00;
-                ALUSrc = 1'b0;
-                ImmSrc = 3'b000;//ImmSrc should be xxx
-                Branch = 1'b0;
-                Jump= 1'b0;
+                ALUSrcD = 1'b0;
+                ImmSrcD = 3'b000;//ImmSrcD should be xxx
+                BranchD = 1'b0;
+                JumpD= 1'b0;
 
             end
             Itype: begin // I-type load
                 ALUOp = 2'b10;
-                RegWrite = 1'b1;
-                MemWrite = 1'b0;
+                RegWriteD = 1'b1;
+                MemWriteD = 1'b0;
                 ResultSrc = 2'b00;
-                ALUSrc = 1'b1;
-                ImmSrc = 3'b000;
-                Branch = 1'b0;
-                Jump= 1'b0;
+                ALUSrcD = 1'b1;
+                ImmSrcD = 3'b000;
+                BranchD = 1'b0;
+                JumpD= 1'b0;
             end
             // Add more cases for other opcodes as needed
             Lw: begin // lw type
                 ALUOp = 2'b00;
-                RegWrite = 1'b1;
-                MemWrite = 1'b0;
+                RegWriteD = 1'b1;
+                MemWriteD = 1'b0;
                 ResultSrc = 2'b01;
-                ALUSrc = 1'b1;
-                ImmSrc = 3'b000;
-                Branch = 1'b0;
-                Jump= 1'b0;
+                ALUSrcD = 1'b1;
+                ImmSrcD = 3'b000;
+                BranchD = 1'b0;
+                JumpD= 1'b0;
             end
             Sw: begin // sw type
                 ALUOp = 2'b00;
-                RegWrite = 1'b0;
-                MemWrite = 1'b1;
+                RegWriteD = 1'b0;
+                MemWriteD = 1'b1;
                 ResultSrc = 2'b00;//result src should be xx
-                ALUSrc = 1'b1;
-                ImmSrc = 3'b001;
-                Branch = 1'b0;
-                Jump= 1'b0;
+                ALUSrcD = 1'b1;
+                ImmSrcD = 3'b001;
+                BranchD = 1'b0;
+                JumpD= 1'b0;
             end
             Btype: begin // branch
                 ALUOp = 2'b01;
-                RegWrite = 1'b0;
-                MemWrite = 1'b0;
+                RegWriteD = 1'b0;
+                MemWriteD = 1'b0;
                 ResultSrc = 2'b00;//result src should be xx
-                ALUSrc = 1'b0;
-                ImmSrc = 3'b010;
-                Branch = 1'b1;
-                Jump= 1'b0;
+                ALUSrcD = 1'b0;
+                ImmSrcD = 3'b010;
+                BranchD = 1'b1;
+                JumpD= 1'b0;
             end
             Jalr: begin // jalr
                 ALUOp = 2'b10;
-                RegWrite = 1'b0;
-                MemWrite = 1'b0;
+                RegWriteD = 1'b0;
+                MemWriteD = 1'b0;
                 ResultSrc = 2'b00;
-                ALUSrc = 1'b1;
-                ImmSrc = 3'b000;
-                Branch = 1'b0;
-                Jump = 1'b1;
+                ALUSrcD = 1'b1;
+                ImmSrcD = 3'b000;
+                BranchD = 1'b0;
+                JumpD = 1'b1;
                 JalrD = 1'b1;
             end
             LUI: begin // lui
                 ALUOp = 2'b00; //aluop is xx
-                RegWrite = 1'b1;
-                MemWrite = 1'b0;
+                RegWriteD = 1'b1;
+                MemWriteD = 1'b0;
                 ResultSrc = 2'b11;
-                ALUSrc = 1'b0;
-                ImmSrc = 3'b100;
-                Branch = 1'b0;
-                Jump= 1'b0;
+                ALUSrcD = 1'b0;
+                ImmSrcD = 3'b100;
+                BranchD = 1'b0;
+                JumpD= 1'b0;
                 LuiD = 1'b1;
             end
             Jal: begin // Jal
                 ALUOp = 2'b00; //aluop is xx
-                RegWrite = 1'b1;
-                MemWrite = 1'b0;
+                RegWriteD = 1'b1;
+                MemWriteD = 1'b0;
                 ResultSrc = 2'b10;
-                ALUSrc = 1'b0;
-                ImmSrc = 3'b011;
-                Branch = 1'b0;
-                Jump= 1'b1;
+                ALUSrcD = 1'b0;
+                ImmSrcD = 3'b011;
+                BranchD = 1'b0;
+                JumpD= 1'b1;
             end
         endcase
     end
@@ -130,14 +129,14 @@ module Controller (
                     
     always @(ALUOp, funct3, funct7,op) begin
         case (ALUOp)
-            2'b00: ALUControl = ALU_ADD;
-            2'b01: ALUControl = ALU_SUB; // beq
+            2'b00: ALUControlD = ALU_ADD;
+            2'b01: ALUControlD = ALU_SUB; // beq
             2'b10: begin // R-type and I-type
                 case (funct3)
-                    3'b000: ALUControl = ((((op==Rtype)&funct7==1'b0) | (op==Itype))  | (op==Jalr)) ? ALU_ADD : ALU_SUB; // add or sub
-                    3'b010: ALUControl = ALU_SLT; 
-                    3'b110: ALUControl = ALU_OR;
-                    3'b111: ALUControl = ALU_AND;
+                    3'b000: ALUControlD = ((((op==Rtype)&funct7==1'b0) | (op==Itype))  | (op==Jalr)) ? ALU_ADD : ALU_SUB; // add or sub
+                    3'b010: ALUControlD = ALU_SLT; 
+                    3'b110: ALUControlD = ALU_OR;
+                    3'b111: ALUControlD = ALU_AND;
                 endcase
             end
         endcase

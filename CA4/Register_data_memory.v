@@ -6,6 +6,7 @@ module DataMemory_register (
     input wire [4:0]  RdM,
     input wire [31:0] PCPlus4M,
     input wire        RegWriteM,
+    input wire        MemWriteM,
     input wire [1:0]  ResultSrcM,
 
     output reg [31:0] ALUResultW,
@@ -14,6 +15,7 @@ module DataMemory_register (
     output reg [31:0] PCPlus4W,
     output reg        RegWriteW,
     output reg [1:0]  ResultSrcW,
+    output reg        MemWriteW
 
 );
 

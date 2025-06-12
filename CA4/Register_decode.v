@@ -17,7 +17,8 @@ module Decode_register (
     input wire [4:0] RdD,
     input wire [31:0] ImmExtD,
     input wire LuiD,
-    input wire PCPlus4D,
+    input wire [31:0] PCPlus4D,
+    input wire [2:0] funct3D,
     output reg JalrE,
     output reg RegWriteE,
     output reg [1:0] ResultSrcE,
@@ -34,8 +35,8 @@ module Decode_register (
     output reg [4:0] RdE,
     output reg [31:0] ImmExtE,
     output reg [31:0] PCPlus4E,
-    output reg LuiE
-
+    output reg LuiE,
+    output reg [2:0] funct3E
 );
 
 always @(posedge clk) begin
@@ -56,6 +57,8 @@ always @(posedge clk) begin
         RdE          <= 5'b0;
         ImmExtE      <= 32'b0;
         PCPlus4E     <= 32'b0;
+        funct3E      <= 3'b0;
+        LuiE         <= 1'b0;
     end else begin
         JalrE        <= JalrD;
         RegWriteE    <= RegWriteD;
@@ -73,6 +76,9 @@ always @(posedge clk) begin
         RdE          <= RdD;
         ImmExtE      <= ImmExtD;
         PCPlus4E     <= PCPlus4D;
+        funct3E      <= funct3D;
+        LuiE         <= LuiD;
+
     end
 end
 

@@ -1,7 +1,7 @@
 module HazardUnit(
     input RegWriteM,
     input RegWriteW,
-    input [1:0] ResultSrcE, ResultSrcM, ResultSrcW,
+    input [1:0] ResultSrcE,
     input [4:0] Rs1D, Rs2D, Rs1E, Rs2E, RdE, RdM, RdW,
     input PCSrcE,
     output StallF, StallD, FlushD, FlushE,

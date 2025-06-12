@@ -1,8 +1,10 @@
-module Mux2to1 (
-    input wire a,
-    input wire b,
+module Mux2to1 #(
+    parameter WIDTH = 1
+)(
+    input wire [WIDTH-1:0] a,
+    input wire [WIDTH-1:0] b,
     input wire sel,
-    output wire y
+    output wire [WIDTH-1:0] y
 );
 
 assign y = sel ? b : a;

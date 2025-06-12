@@ -1,5 +1,5 @@
 module MuxPC(
-    input [1:0] PCSrc,
+    input PCSrc,
     input [31:0] PCPlus4,
     input [31:0] PCTarget,
     output reg [31:0] PCNext
