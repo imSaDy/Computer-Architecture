@@ -9,11 +9,13 @@ module Controller (
     output reg ALUSrc,
     output reg [2:0] ALUControl,
     output reg [2:0] ImmSrc,
-
-    output reg [1:0]PCSrc
-
+    output reg JalrD,
+    output reg PCSrc,
+    output reg LuiD,
+    output reg Jump,
+    output reg Branch,
+    output reg Beq
 );
-    reg Branch, Jump;
     parameter [6:0]  Rtype = 7'b0110011,
                     Itype = 7'b0010011,
                     Lw = 7'b0000011,
@@ -24,11 +26,12 @@ module Controller (
                     Jal = 7'd111;
     reg [1:0] ALUOp;
     wire branch_zero_type;
+    assign Beq = (funct3 == 3'b001);
     assign branch_zero_type= (funct3==3'b001)? ~Zero : Zero;
-    assign PCSrc[0] = (Branch & branch_zero_type)| Jump;
+    assign PCSrc = (Branch & branch_zero_type)| Jump;
     //Main Decoder
     always @(op) begin
-        {PCSrc,RegWrite,MemWrite,ResultSrc,ALUSrc,ImmSrc,Branch,Jump,PCSrc[1]} = 15'b0;
+        {PCSrc,RegWrite,MemWrite,ResultSrc,ALUSrc,ImmSrc,Branch,Jump,JalrD,LuiD} = 16'b0;
         case (op)
             Rtype: begin // R-type
                 ALUOp = 2'b10;
@@ -91,7 +94,7 @@ module Controller (
                 ImmSrc = 3'b000;
                 Branch = 1'b0;
                 Jump = 1'b1;
-                PCSrc[1]=1'b1;
+                JalrD = 1'b1;
             end
             LUI: begin // lui
                 ALUOp = 2'b00; //aluop is xx
@@ -102,6 +105,7 @@ module Controller (
                 ImmSrc = 3'b100;
                 Branch = 1'b0;
                 Jump= 1'b0;
+                LuiD = 1'b1;
             end
             Jal: begin // Jal
                 ALUOp = 2'b00; //aluop is xx
@@ -120,9 +124,10 @@ module Controller (
     parameter [2:0] 
                     ALU_ADD = 3'b000,
                     ALU_SUB = 3'b001,
-                    ALU_SLT = 3'b101,
+                    ALU_AND = 3'b010,
                     ALU_OR  = 3'b011,
-                    ALU_AND = 3'b010;
+                    ALU_SLT = 3'b101;
+                    
     always @(ALUOp, funct3, funct7,op) begin
         case (ALUOp)
             2'b00: ALUControl = ALU_ADD;
