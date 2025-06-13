@@ -2,14 +2,14 @@ module Fetch_register (
     input wire clk,
     input wire EN,
     input wire clear,
-    input wire [31:0] InstrF,
+    input wire [31:0] InstrF ,
     input wire [31:0] PCF,
     input wire [31:0] PCPlus4F,
     output reg [31:0] InstrD,
     output reg [31:0] PCD,
     output reg [31:0] PCPlus4D
 );
-
+assign {InstrD, PCD, PCPlus4D} = 0;
 always @(posedge clk) begin
     if (clear) begin
         InstrD        <= 32'b0;

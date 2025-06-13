@@ -38,7 +38,8 @@ module Decode_register (
     output reg LuiE,
     output reg [2:0] funct3E
 );
-
+assign {JalrE, RegWriteE, ResultSrcE, MemWriteE, JumpE, BranchE, ALUControlE, ALUSrcE,
+ RD1E, RD2E, PCE, Rs1E, Rs2E, RdE, ImmExtE, PCPlus4E, LuiE, funct3E} = 0;
 always @(posedge clk) begin
     if (clear) begin
         JalrE        <= 1'b0;

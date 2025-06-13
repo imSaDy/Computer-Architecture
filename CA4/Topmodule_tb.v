@@ -11,9 +11,6 @@ module Topmodule_tb;
     always #5 clk = ~clk;
     initial begin
         clk = 0;
-        reset = 1;
-        #100;
-        reset = 0;
         #40000;
         $stop;
     end

@@ -18,7 +18,7 @@ module DataMemory_register (
     output reg        MemWriteW
 
 );
-
+assign {ALUResultW, ReadDataW, RdW, PCPlus4W, RegWriteW, ResultSrcW, MemWriteW} = 0;
 always @(posedge clk) begin
     if (clear) begin
         ALUResultW <= 32'b0;

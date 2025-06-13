@@ -16,7 +16,7 @@ module Execution_register (
     output reg [4:0] RdM,
     output reg [31:0] PCPlus4M
 );
-
+assign {RegWriteM, ResultSrcM, MemWriteM, ALUResultM, WriteDataM, RdM, PCPlus4M} = 0;
 always @(posedge clk) begin
     if (clear) begin
         RegWriteM   <= 1'b0;
