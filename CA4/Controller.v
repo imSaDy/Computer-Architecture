@@ -86,9 +86,9 @@ module Controller (
             end
             Jalr: begin // jalr
                 ALUOp = 2'b10;
-                RegWriteD = 1'b0;
+                RegWriteD = 1'b1;
                 MemWriteD = 1'b0;
-                ResultSrc = 2'b00;
+                ResultSrc = 2'b10;
                 ALUSrcD = 1'b1;
                 ImmSrcD = 3'b000;
                 BranchD = 1'b0;

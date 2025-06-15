@@ -9,16 +9,20 @@ module Fetch_register (
     output reg [31:0] PCD,
     output reg [31:0] PCPlus4D
 );
-assign {InstrD, PCD, PCPlus4D} = 0;
-always @(posedge clk) begin
-    if (clear) begin
-        InstrD        <= 32'b0;
-        PCD       <= 32'b0;
-        PCPlus4D  <= 32'b0;
-    end else if (!EN) begin
-        InstrD        <= InstrF;
-        PCD       <= PCF;
-        PCPlus4D  <= PCPlus4F;
+    initial begin
+        InstrD = 0;
+        PCD = 0;
+        PCPlus4D = 0;
     end
-end
+    always @(posedge clk) begin
+        if (clear) begin
+            InstrD    <= 32'b0;
+            PCD       <= 32'b0;
+            PCPlus4D  <= 32'b0;
+        end else if (!EN) begin
+            InstrD    <= InstrF;
+            PCD       <= PCF;
+            PCPlus4D  <= PCPlus4F;
+        end
+    end
 endmodule

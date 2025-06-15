@@ -16,25 +16,32 @@ module Execution_register (
     output reg [4:0] RdM,
     output reg [31:0] PCPlus4M
 );
-assign {RegWriteM, ResultSrcM, MemWriteM, ALUResultM, WriteDataM, RdM, PCPlus4M} = 0;
-always @(posedge clk) begin
-    if (clear) begin
-        RegWriteM   <= 1'b0;
-        ResultSrcM  <= 2'b0;
-        MemWriteM   <= 1'b0;
-        ALUResultM  <= 32'b0;
-        WriteDataM  <= 32'b0;
-        RdM         <= 5'b0;
-        PCPlus4M    <= 32'b0;
-    end else begin
-        RegWriteM   <= RegWriteE;
-        ResultSrcM  <= ResultSrcE;
-        MemWriteM   <= MemWriteE;
-        ALUResultM  <= ALUResultE;
-        WriteDataM  <= WriteDataE;
-        RdM         <= RdE;
-        PCPlus4M    <= PCPlus4E;
+    initial begin
+        RegWriteM = 0;
+        ResultSrcM = 0;
+        MemWriteM = 0;
+        ALUResultM = 0;
+        WriteDataM = 0;
+        RdM = 0;
+        PCPlus4M = 0;
     end
-end
-
+    always @(posedge clk) begin
+        if (clear) begin
+            RegWriteM   <= 1'b0;
+            ResultSrcM  <= 2'b0;
+            MemWriteM   <= 1'b0;
+            ALUResultM  <= 32'b0;
+            WriteDataM  <= 32'b0;
+            RdM         <= 5'b0;
+            PCPlus4M    <= 32'b0;
+        end else begin
+            RegWriteM   <= RegWriteE;
+            ResultSrcM  <= ResultSrcE;
+            MemWriteM   <= MemWriteE;
+            ALUResultM  <= ALUResultE;
+            WriteDataM  <= WriteDataE;
+            RdM         <= RdE;
+            PCPlus4M    <= PCPlus4E;
+        end
+    end
 endmodule

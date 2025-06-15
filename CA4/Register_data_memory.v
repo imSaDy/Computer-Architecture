@@ -16,25 +16,36 @@ module DataMemory_register (
     output reg        RegWriteW,
     output reg [1:0]  ResultSrcW,
     output reg        MemWriteW
-
 );
-assign {ALUResultW, ReadDataW, RdW, PCPlus4W, RegWriteW, ResultSrcW, MemWriteW} = 0;
-always @(posedge clk) begin
-    if (clear) begin
-        ALUResultW <= 32'b0;
-        ReadDataW  <= 32'b0;
-        RdW        <= 5'b0;
-        PCPlus4W   <= 32'b0;
-        RegWriteW  <= 1'b0;
-        ResultSrcW <= 2'b0;
-    end else begin
-        ALUResultW <= ALUResultM;
-        ReadDataW  <= ReadDataM;
-        RdW        <= RdM;
-        PCPlus4W   <= PCPlus4M;
-        RegWriteW  <= RegWriteM;
-        ResultSrcW <= ResultSrcM;
+
+    initial begin
+        ALUResultW = 32'b0;
+        ReadDataW  = 32'b0;
+        RdW        = 5'b0;
+        PCPlus4W   = 32'b0;
+        RegWriteW  = 1'b0;
+        ResultSrcW = 2'b0;
+        MemWriteW  = 1'b0;
     end
-end
+
+    always @(posedge clk) begin
+        if (clear) begin
+            ALUResultW <= 32'b0;
+            ReadDataW  <= 32'b0;
+            RdW        <= 5'b0;
+            PCPlus4W   <= 32'b0;
+            RegWriteW  <= 1'b0;
+            ResultSrcW <= 2'b0;
+            MemWriteW  <= 1'b0;
+        end else begin
+            ALUResultW <= ALUResultM;
+            ReadDataW  <= ReadDataM;
+            RdW        <= RdM;
+            PCPlus4W   <= PCPlus4M;
+            RegWriteW  <= RegWriteM;
+            ResultSrcW <= ResultSrcM;
+            MemWriteW  <= MemWriteM;
+        end
+    end
 
 endmodule

@@ -87,7 +87,7 @@ module DataPath(
 
     Fetch_register fetch_register(
         .clk(clk),
-        .EN(StallD ),
+        .EN(StallD),
         .clear(FlushD),
         .InstrF(InstrF),
         .PCF(PCF),
@@ -162,8 +162,8 @@ module DataPath(
     
 
     Mux2to1 #(.WIDTH(32)) Lui_select (
-        .a(32'b0),
-        .b(RD1E),
+        .b(32'b0),
+        .a(RD1E),
         .sel(LuiE),
         .y(Lui_mux_output)
     );

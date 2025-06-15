@@ -7,7 +7,7 @@ module RegisterPC(
         PC = 32'd0;
     end
 
-    always @(posedge clk, negedge reset) begin
+    always @(posedge clk, posedge reset) begin
         if (!reset)
             PC <= 32'd0; 
         else if (!EN)

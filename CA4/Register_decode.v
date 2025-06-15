@@ -38,49 +38,67 @@ module Decode_register (
     output reg LuiE,
     output reg [2:0] funct3E
 );
-assign {JalrE, RegWriteE, ResultSrcE, MemWriteE, JumpE, BranchE, ALUControlE, ALUSrcE,
- RD1E, RD2E, PCE, Rs1E, Rs2E, RdE, ImmExtE, PCPlus4E, LuiE, funct3E} = 0;
-always @(posedge clk) begin
-    if (clear) begin
-        JalrE        <= 1'b0;
-        RegWriteE    <= 1'b0;
-        ResultSrcE   <= 2'b0;
-        MemWriteE    <= 1'b0;
-        JumpE        <= 1'b0;
-        BranchE      <= 1'b0;
-        ALUControlE  <= 3'b0;
-        ALUSrcE      <= 1'b0;
-        RD1E         <= 32'b0;
-        RD2E         <= 32'b0;
-        PCE         <= 32'b0;
-        Rs1E         <= 5'b0;
-        Rs2E         <= 5'b0;
-        RdE          <= 5'b0;
-        ImmExtE      <= 32'b0;
-        PCPlus4E     <= 32'b0;
-        funct3E      <= 3'b0;
-        LuiE         <= 1'b0;
-    end else begin
-        JalrE        <= JalrD;
-        RegWriteE    <= RegWriteD;
-        ResultSrcE   <= ResultSrcD;
-        MemWriteE    <= MemWriteD;
-        JumpE        <= JumpD;
-        BranchE      <= BranchD;
-        ALUControlE  <= ALUControlD;
-        ALUSrcE      <= ALUSrcD;
-        RD1E         <= RD1D;
-        RD2E         <= RD2D;
-        PCE          <= PCD;
-        Rs1E         <= Rs1D;
-        Rs2E         <= Rs2D;
-        RdE          <= RdD;
-        ImmExtE      <= ImmExtD;
-        PCPlus4E     <= PCPlus4D;
-        funct3E      <= funct3D;
-        LuiE         <= LuiD;
-
+    initial begin 
+        JalrE = 0;
+        RegWriteE = 0;
+        ResultSrcE = 0;
+        MemWriteE = 0;
+        JumpE = 0;
+        BranchE = 0;
+        ALUControlE = 0;
+        ALUSrcE = 0;
+        RD1E = 0;
+        RD2E = 0;
+        PCE = 0;
+        Rs1E = 0;
+        Rs2E = 0;
+        RdE = 0;
+        ImmExtE = 0;
+        PCPlus4E = 0;
+        LuiE = 0;
+        funct3E = 0;
     end
-end
+    always @(posedge clk) begin
+        if (clear) begin
+            JalrE        <= 1'b0;
+            RegWriteE    <= 1'b0;
+            ResultSrcE   <= 2'b0;
+            MemWriteE    <= 1'b0;
+            JumpE        <= 1'b0;
+            BranchE      <= 1'b0;
+            ALUControlE  <= 3'b0;
+            ALUSrcE      <= 1'b0;
+            RD1E         <= 32'b0;
+            RD2E         <= 32'b0;
+            PCE         <= 32'b0;
+            Rs1E         <= 5'b0;
+            Rs2E         <= 5'b0;
+            RdE          <= 5'b0;
+            ImmExtE      <= 32'b0;
+            PCPlus4E     <= 32'b0;
+            funct3E      <= 3'b0;
+            LuiE         <= 1'b0;
+        end else begin
+            JalrE        <= JalrD;
+            RegWriteE    <= RegWriteD;
+            ResultSrcE   <= ResultSrcD;
+            MemWriteE    <= MemWriteD;
+            JumpE        <= JumpD;
+            BranchE      <= BranchD;
+            ALUControlE  <= ALUControlD;
+            ALUSrcE      <= ALUSrcD;
+            RD1E         <= RD1D;
+            RD2E         <= RD2D;
+            PCE          <= PCD;
+            Rs1E         <= Rs1D;
+            Rs2E         <= Rs2D;
+            RdE          <= RdD;
+            ImmExtE      <= ImmExtD;
+            PCPlus4E     <= PCPlus4D;
+            funct3E      <= funct3D;
+            LuiE         <= LuiD;
+
+        end
+    end
 
 endmodule
