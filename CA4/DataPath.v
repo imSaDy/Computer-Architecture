@@ -184,20 +184,20 @@ module DataPath(
         .y(WriteDataE)
     );
     Mux2to1 #(.WIDTH(32)) Jalr_mux(
-        .a(ImmExtE),
+        .a(PCE),
         .b(RD1E),
         .sel(JalrE),
         .y(Jalr_mux_output)
     );
     Mux2to1 #(.WIDTH(32)) SrcB_selector (
         .a(WriteDataE),
-        .b(Jalr_mux_output),
+        .b(ImmExtE),
         .sel(ALUSrcE),
         .y(SrcBE)
     );
     AdderPCTarget adderPCTarget(
-        .PC(PCE),
-        .ImmExt(Jalr_mux_output),
+        .PC(Jalr_mux_output),
+        .ImmExt(ImmExtE),
         .PCTarget(PCTargetE)
     );
     ALU alu(

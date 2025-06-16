@@ -1,0 +1,22 @@
+add s0,zero,zero
+add s1,zero,zero
+add s2,zero,zero
+add s3,zero,zero
+addi s4,zero,20
+add s5,zero,zero
+
+FOR: bne s5,s4,LOOP_BODY
+     jal zero,END_LOOP
+
+LOOP_BODY:
+     add t3,s2,s0
+     lw t1,0(t3)
+     slt t2,s3,t1
+     beq t2,zero,END_IF
+     add s3,zero,t1
+     add s1,zero,s5
+END_IF:
+     addi s2,s2,4
+     addi s5,s5,1
+     jal zero,FOR
+END_LOOP:

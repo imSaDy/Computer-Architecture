@@ -99,8 +99,8 @@ module Controller (
                 ALUOp = 2'b00; //aluop is xx
                 RegWriteD = 1'b1;
                 MemWriteD = 1'b0;
-                ResultSrc = 2'b11;
-                ALUSrcD = 1'b0;
+                ResultSrc = 2'b00;
+                ALUSrcD = 1'b1;
                 ImmSrcD = 3'b100;
                 BranchD = 1'b0;
                 JumpD= 1'b0;
