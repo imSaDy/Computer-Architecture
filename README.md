@@ -9,8 +9,6 @@ Hardware designs in Verilog for the Computer Architecture course at the Universi
 | [CA3](CA3) | **Multi-cycle stack processor.** An 8-bit processor with a 5-bit address bus and eight instructions (`push`, `pop`, `add`, `sub`, `and`, `not`, `jmp`, `jz`), where every operation works on an internal stack. |
 | [CA4](CA4) | **Pipelined RISC-V processor.** A five-stage version of the CA2 processor. A hazard unit forwards results from the memory and write-back stages, stalls on load-use hazards and flushes the pipeline on taken branches and jumps. |
 
-The assignment statement is included for CA3. Folders also contain the submitted `.zip` archives.
-
 ## Running
 
 Open the Verilog files in ModelSim (or any Verilog simulator), compile them, and run the top-level testbench in each folder (`Topmodule_tb.v`, or `Tobmodule_tb.v` in CA3). Memory contents are loaded from the `.mem` and `.txt` files next to the sources.
